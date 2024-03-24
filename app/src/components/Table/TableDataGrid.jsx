@@ -11,8 +11,8 @@ const columns = [
     },
   },
   {
-    field: "role",
-    headerName: "Role",
+    field: "status",
+    headerName: "Status",
     minWidth: 100,
     renderCell: (cellValues) => {
       return cellValues.value;
@@ -95,7 +95,7 @@ export const contactData = [
   },
 ];
 
-export default function Table() {
+export default function Table({ jsonData }) {
   const rows = () => [...contactData];
   return (
     <Box sx={{ height: "100%" }}>

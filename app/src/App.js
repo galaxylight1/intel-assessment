@@ -20,18 +20,23 @@ export default function App() {
     fetch("/API_DATA.json")
       .then((response) => response.json())
       .then((data) => {
-        setJsonData(Object.values(data).slice(0, 5));
+        data = Object.values(data).slice(0, 5);
+        data = data.filter((item) => {
+          if (item.name || item.status) return true;
+        });
+        setJsonData(data);
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
   console.log(jsonData);
+
   return (
     <div>
       <Navbar />
       <Sidebar />
       <main style={styles.content}>
-        <Table />
+        <Table jsonData={jsonData} />
       </main>
     </div>
   );

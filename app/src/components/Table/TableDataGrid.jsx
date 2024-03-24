@@ -6,6 +6,8 @@ import {
   GridToolbarFilterButton,
   GridToolbarExport,
   GridToolbarDensitySelector,
+  GridToolbarQuickFilter,
+  GridPagination,
 } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 
@@ -63,13 +65,15 @@ function customToolbar() {
       <GridToolbarDensitySelector
         slotProps={{ tooltip: { title: "Change density" } }}
       />
-      <Box sx={{ flexGrow: 0.995 }} />
       <GridToolbarExport
         slotProps={{
           tooltip: { title: "Export as CSV" },
           button: { variant: "outlined" },
         }}
       />
+      <Box sx={{ flexGrow: 0.99 }} />
+      <GridToolbarQuickFilter />
+      <GridPagination />
     </GridToolbarContainer>
   );
 }

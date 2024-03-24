@@ -12,7 +12,7 @@ const columns = [
   },
   {
     field: "name",
-    headerName: "Name",
+    headerName: "Product Name",
     minWidth: 500,
     renderCell: (cellValues) => {
       return cellValues.row.name;
@@ -30,8 +30,16 @@ const columns = [
     },
   },
   {
+    field: "cores",
+    headerName: "# of Cores",
+    minWidth: 100,
+    renderCell: (cellValues) => {
+      return cellValues.row.cores;
+    },
+  },
+  {
     field: "status",
-    headerName: "Status",
+    headerName: "Product Status",
     minWidth: 150,
     renderCell: (cellValues) => {
       return cellValues.row.status;
@@ -46,6 +54,7 @@ export default function Table({ jsonData }) {
     name: item.name,
     productCollection: item.Essentials["Product Collection"],
     status: item.Essentials.Status,
+    cores: item.Performance ? parseInt(item.Performance["# of Cores"]) : 0,
   }));
   const rows = () => [...jsonData];
   return (

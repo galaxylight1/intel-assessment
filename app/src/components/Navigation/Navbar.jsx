@@ -2,13 +2,12 @@ import { AppBar, Toolbar, Typography, Grid, Box } from "@mui/material";
 import logo from "../../logo.svg";
 
 const styles = {
-  navBar: { boxShadow: "none", backgroundColor: "#0067B4" },
-  toolBar: { height: "100%" },
+  navBar: { boxShadow: "none", backgroundColor: "#0067B4", height: "3.5rem" },
+  toolBar: { height: "100%", display: "flex", alignItems: "center" },
   logoBox: {
     width: 65,
     height: 65,
-    display: "flex",
-    alignItems: "center",
+    height: "100%",
   },
 };
 

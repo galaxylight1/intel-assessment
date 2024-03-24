@@ -9,7 +9,7 @@ const styles = {
   content: {
     marginLeft: "0.5rem",
     marginRight: "0.5rem",
-    marginTop: "5rem",
+    marginTop: "4.5rem",
   },
 };
 

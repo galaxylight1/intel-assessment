@@ -1,4 +1,12 @@
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbar,
+  GridToolbarContainer,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+  GridToolbarDensitySelector,
+} from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 
 const columns = [
@@ -47,6 +55,25 @@ const columns = [
   },
 ];
 
+function customToolbar() {
+  return (
+    <GridToolbarContainer sx={{ marginTop: "0.1rem" }}>
+      <GridToolbarColumnsButton />
+      <GridToolbarFilterButton />
+      <GridToolbarDensitySelector
+        slotProps={{ tooltip: { title: "Change density" } }}
+      />
+      <Box sx={{ flexGrow: 0.995 }} />
+      <GridToolbarExport
+        slotProps={{
+          tooltip: { title: "Export as CSV" },
+          button: { variant: "outlined" },
+        }}
+      />
+    </GridToolbarContainer>
+  );
+}
+
 export default function Table({ jsonData }) {
   // pre-processing
   jsonData = jsonData.map((item, idx) => ({
@@ -69,8 +96,8 @@ export default function Table({ jsonData }) {
           // TODO: change this slightly
           marginLeft: { xs: "50px", md: "200px" },
           minHeight: "10rem",
-          disply: "flex",
-          flexDirection: "column-reverse",
+          // disply: "flex",
+          // flexDirection: "column-reverse",
         }}
         autoHeight
         initialState={{
@@ -78,6 +105,15 @@ export default function Table({ jsonData }) {
             sortModel: [{ field: "id", sort: "asc" }],
           },
         }}
+        // disableColumnFilter
+        // disableColumnSelector
+        // disableDensitySelector
+        slots={{ toolbar: customToolbar }}
+        // slotProps={{
+        //   toolbar: {
+        //     showQuickFilter: true,
+        //   },
+        // }}
       />
     </Box>
   );

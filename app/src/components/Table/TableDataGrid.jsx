@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import customToolbar from "./CustomToolbar";
@@ -35,7 +36,7 @@ const columns = [
     headerName: "# of Cores",
     minWidth: 100,
     renderCell: (cellValues) => {
-      return cellValues.row.cores;
+      return cellValues.row.cores === 0 ? "-" : cellValues.row.cores;
     },
   },
   {
@@ -49,6 +50,7 @@ const columns = [
 ];
 
 export default function Table({ jsonData }) {
+  const [rowSelectionModel, setRowSelectionModel] = useState([]);
   // pre-processing
   jsonData = jsonData.map((item, idx) => ({
     id: 1 + idx, // TODO: id: 27076 + idx,
@@ -80,6 +82,13 @@ export default function Table({ jsonData }) {
           },
         }}
         checkboxSelection
+        rowSelectionModel={rowSelectionModel}
+        onRowSelectionModelChange={(newRowSelectionModel) => {
+          if(newRowSelectionModel.length > 2) {
+            return;
+          }
+          setRowSelectionModel(newRowSelectionModel);
+        }}
         // disableColumnFilter
         // disableColumnSelector
         // disableDensitySelector

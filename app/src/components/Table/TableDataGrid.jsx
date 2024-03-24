@@ -11,6 +11,14 @@ const columns = [
     },
   },
   {
+    field: "product_collection",
+    headerName: "Product Collection",
+    minWidth: 100,
+    renderCell: (cellValues) => {
+      return cellValues.row.Essentials["Product Collection"];
+    },
+  },
+  {
     field: "status",
     headerName: "Status",
     minWidth: 100,
@@ -25,6 +33,7 @@ export default function Table({ jsonData }) {
   return (
     <Box sx={{ height: "100%" }}>
       <DataGrid
+        // autoHeight
         getRowId={(row) => row.name}
         rows={rows()}
         columns={columns}

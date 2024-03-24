@@ -1,15 +1,6 @@
-import {
-  DataGrid,
-  GridToolbar,
-  GridToolbarContainer,
-  GridToolbarColumnsButton,
-  GridToolbarFilterButton,
-  GridToolbarExport,
-  GridToolbarDensitySelector,
-  GridToolbarQuickFilter,
-  GridPagination,
-} from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import customToolbar from "./CustomToolbar";
 
 const columns = [
   {
@@ -57,30 +48,6 @@ const columns = [
   },
 ];
 
-function customToolbar() {
-  return (
-    <GridToolbarContainer sx={{ marginTop: "0.1rem" }}>
-      <GridToolbarColumnsButton />
-      <GridToolbarFilterButton />
-      <GridToolbarDensitySelector
-        slotProps={{ tooltip: { title: "Change density" } }}
-      />
-      <GridToolbarExport
-        slotProps={{
-          tooltip: { title: "Export as CSV" },
-          button: {
-            variant: "outlined",
-            sx: { borderRadius: 0 },
-          },
-        }}
-      />
-      <Box sx={{ flexGrow: 1 }} />
-      <GridToolbarQuickFilter sx={{ marginLeft: "0.5rem" }} />
-      <GridPagination />
-    </GridToolbarContainer>
-  );
-}
-
 export default function Table({ jsonData }) {
   // pre-processing
   jsonData = jsonData.map((item, idx) => ({
@@ -112,12 +79,7 @@ export default function Table({ jsonData }) {
             sortModel: [{ field: "id", sort: "asc" }],
           },
         }}
-        componentsProps={{
-          panel: {
-            anchorEl: customToolbar,
-            // placement: "bottom",
-          },
-        }}
+        checkboxSelection
         // disableColumnFilter
         // disableColumnSelector
         // disableDensitySelector

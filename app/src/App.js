@@ -10,6 +10,7 @@ const styles = {
     marginLeft: "0.7rem",
     marginRight: "0.5rem",
     marginTop: "4.5rem",
+    marginBottom: "1rem",
   },
 };
 

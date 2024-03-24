@@ -39,23 +39,28 @@ export default function Table({ jsonData }) {
     productCollection: item.Essentials["Product Collection"],
     status: item.Essentials.Status,
   }));
-
   const rows = () => [...jsonData];
   return (
     <Box sx={{ height: "100%" }}>
       <DataGrid
-        // autoHeight
         getRowId={(row) => row.name}
         rows={jsonData}
         columns={columns}
         headerHeight={50}
         rowHeight={50}
+        sx={{
+          // TODO: change this slightly
+          marginLeft: { xs: "50px", md: "200px" },
+          minHeight: "10rem",
+          disply: "flex",
+          flexDirection: "column-reverse",
+        }}
+        autoHeight
         // initialState={{
         //   sorting: {
         //     sortModel: [{ field: "productCollection", sort: "asc" }],
         //   },
         // }}
-        sx={{ marginLeft: { xs: "50px", md: "200px" } }} // TODO: change this
       />
     </Box>
   );

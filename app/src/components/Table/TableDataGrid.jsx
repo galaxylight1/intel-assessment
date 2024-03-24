@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 const columns = [
   {
     field: "id",
-    headerName: "Product ID",
+    headerName: "ID",
     minWidth: 100,
     renderCell: (cellValues) => {
       return cellValues.row.id;
@@ -66,7 +66,7 @@ export default function Table({ jsonData }) {
         autoHeight
         initialState={{
           sorting: {
-            sortModel: [{ field: "name", sort: "asc" }],
+            sortModel: [{ field: "id", sort: "asc" }],
           },
         }}
       />

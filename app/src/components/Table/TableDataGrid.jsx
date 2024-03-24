@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+import { Box, FormControlLabel, Switch } from "@mui/material";
 import customToolbar from "./CustomToolbar";
 
 const columns = [
@@ -50,7 +50,9 @@ const columns = [
 ];
 
 export default function Table({ jsonData }) {
+  const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
+
   // pre-processing
   jsonData = jsonData.map((item, idx) => ({
     id: 1 + idx, // TODO: id: 27076 + idx,
@@ -59,12 +61,24 @@ export default function Table({ jsonData }) {
     status: item.Essentials.Status,
     cores: item.Performance ? parseInt(item.Performance["# of Cores"]) : 0,
   }));
+
   const rows = () => [...jsonData];
   return (
     <Box sx={{ height: "100%" }}>
+      <Box sx={{ mb: 1, marginLeft: { xs: "3.5rem", md: "13rem" } }}>
+        <FormControlLabel
+          label="Select two units"
+          control={
+            <Switch
+              checked={checkboxSelection}
+              onChange={(event) => setCheckboxSelection(event.target.checked)}
+            />
+          }
+        />
+      </Box>
       <DataGrid
         getRowId={(row) => row.name}
-        rows={jsonData}
+        rows={rows()}
         columns={columns}
         headerHeight={50}
         rowHeight={50}
@@ -81,10 +95,10 @@ export default function Table({ jsonData }) {
             sortModel: [{ field: "id", sort: "asc" }],
           },
         }}
-        checkboxSelection
+        checkboxSelection={checkboxSelection}
         rowSelectionModel={rowSelectionModel}
         onRowSelectionModelChange={(newRowSelectionModel) => {
-          if(newRowSelectionModel.length > 2) {
+          if (newRowSelectionModel.length > 2) {
             return;
           }
           setRowSelectionModel(newRowSelectionModel);

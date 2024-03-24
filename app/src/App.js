@@ -3,8 +3,18 @@ import Navbar from "./components/Navigation/Navbar";
 import Sidebar from "./components/Navigation/Sidebar";
 import Table from "./components/Table/TableDataGrid";
 
+const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
+
+const styles = {
+  content: {
+    marginLeft: drawerWidth + 30,
+    marginTop: "20px",
+  },
+};
+
 export default function App() {
   const [jsonData, setJsonData] = useState([]);
+
   useEffect(() => {
     fetch("/API_DATA.json")
       .then((response) => response.json())
@@ -14,11 +24,14 @@ export default function App() {
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
+
   return (
     <div>
       <Navbar />
       <Sidebar />
-      <Table />
+      <main style={styles.content}>
+        <Table />
+      </main>
     </div>
   );
 }

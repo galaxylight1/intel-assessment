@@ -36,7 +36,7 @@ export default function Table({ jsonData }) {
   jsonData = jsonData.map((item, idx) => ({
     id: idx,
     name: item.name,
-    productCollection: idx % 2 == 0 ? "abc" : "def",
+    productCollection: item.Essentials["Product Collection"],
     status: item.Essentials.Status,
   }));
 

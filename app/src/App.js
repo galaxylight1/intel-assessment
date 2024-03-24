@@ -23,7 +23,7 @@ export default function App() {
     fetch("/API_DATA.json")
       .then((response) => response.json())
       .then((data) => {
-        data = Object.values(data).slice(0, 100);
+        data = Object.values(data);
         data = data.filter((item) => {
           if (item.name || item.status) return true;
         });

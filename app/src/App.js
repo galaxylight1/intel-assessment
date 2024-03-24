@@ -7,8 +7,8 @@ const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
 
 const styles = {
   content: {
-    marginLeft: drawerWidth + 30,
-    marginTop: "20px",
+    marginLeft: '1rem',
+    marginTop: "5rem",
   },
 };
 

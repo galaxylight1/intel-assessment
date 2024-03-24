@@ -13,11 +13,7 @@ const styles = {
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: "#E7E7E7",
-  },
-  content: {
-    marginLeft: drawerWidth + 30,
-    marginTop: "20px",
-  },
+  }
 };
 
 export default function Sidebar() {

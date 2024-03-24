@@ -3,6 +3,14 @@ import { Box } from "@mui/material";
 
 const columns = [
   {
+    field: "id",
+    headerName: "Product ID",
+    minWidth: 100,
+    renderCell: (cellValues) => {
+      return cellValues.row.id;
+    },
+  },
+  {
     field: "name",
     headerName: "Name",
     minWidth: 500,
@@ -34,7 +42,7 @@ const columns = [
 export default function Table({ jsonData }) {
   // pre-processing
   jsonData = jsonData.map((item, idx) => ({
-    id: idx,
+    id: 1 + idx, // TODO: id: 27076 + idx,
     name: item.name,
     productCollection: item.Essentials["Product Collection"],
     status: item.Essentials.Status,

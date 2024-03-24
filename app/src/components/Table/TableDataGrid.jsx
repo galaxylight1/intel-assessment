@@ -68,11 +68,14 @@ function customToolbar() {
       <GridToolbarExport
         slotProps={{
           tooltip: { title: "Export as CSV" },
-          button: { variant: "outlined" },
+          button: {
+            variant: "outlined",
+            sx: { borderRadius: 0 },
+          },
         }}
       />
-      <Box sx={{ flexGrow: 0.99 }} />
-      <GridToolbarQuickFilter />
+      <Box sx={{ flexGrow: 1 }} />
+      <GridToolbarQuickFilter sx={{ marginLeft: "0.5rem" }} />
       <GridPagination />
     </GridToolbarContainer>
   );
@@ -107,6 +110,12 @@ export default function Table({ jsonData }) {
         initialState={{
           sorting: {
             sortModel: [{ field: "id", sort: "asc" }],
+          },
+        }}
+        componentsProps={{
+          panel: {
+            anchorEl: customToolbar,
+            // placement: "bottom",
           },
         }}
         // disableColumnFilter

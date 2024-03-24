@@ -1,6 +1,6 @@
 import { Drawer, Toolbar } from "@mui/material";
 
-const drawerWidth = 200;
+const drawerWidth = { xs: 50, md: 200 };
 
 const styles = {
   drawer: {

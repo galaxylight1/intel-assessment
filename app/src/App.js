@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navigation/Navbar";
 import Sidebar from "./components/Navigation/Sidebar";
+import Table from "./components/Table/TableDataGrid";
 
 export default function App() {
   const [jsonData, setJsonData] = useState([]);
@@ -17,6 +18,7 @@ export default function App() {
     <div>
       <Navbar />
       <Sidebar />
+      <Table />
     </div>
   );
 }

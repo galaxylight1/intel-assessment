@@ -56,11 +56,11 @@ export default function Table({ jsonData }) {
           flexDirection: "column-reverse",
         }}
         autoHeight
-        // initialState={{
-        //   sorting: {
-        //     sortModel: [{ field: "productCollection", sort: "asc" }],
-        //   },
-        // }}
+        initialState={{
+          sorting: {
+            sortModel: [{ field: "name", sort: "asc" }],
+          },
+        }}
       />
     </Box>
   );

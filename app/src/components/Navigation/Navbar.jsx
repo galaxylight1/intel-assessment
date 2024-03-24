@@ -1,4 +1,5 @@
-import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
+import { AppBar, Toolbar, Typography, Grid, Box } from "@mui/material";
+import logo from "../../logo.svg";
 
 const styles = {
   navBar: { boxShadow: "none", backgroundColor: "#0067B4" },
@@ -11,9 +12,9 @@ export default function Navbar() {
       <Toolbar sx={styles.toolBar}>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Typography variant="h6" noWrap>
-              Intel
-            </Typography>
+            <Box sx={{ width: 60, height: 60 }}>
+              <img src={logo} alt="Intel Logo" />
+            </Box>
           </Grid>
           {/* <Grid item>
             <Typography variant="h6" noWrap>

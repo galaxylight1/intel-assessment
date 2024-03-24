@@ -1,4 +1,5 @@
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 
 const columns = [
   {
@@ -97,14 +98,15 @@ export const contactData = [
 export default function Table() {
   const rows = () => [...contactData];
   return (
-    <DataGrid
-      autoHeight
-      rows={rows()}
-      columns={columns}
-      pageSize={5}
-      headerHeight={60}
-      rowHeight={120}
-      sx={{marginLeft: {xs: "50px", md: "200px"}}} // TODO: change this
-    />
+    <Box sx={{ height: "100%" }}>
+      <DataGrid
+        rows={rows()}
+        columns={columns}
+        pageSize={5}
+        headerHeight={50}
+        rowHeight={70}
+        sx={{ marginLeft: { xs: "50px", md: "200px" } }} // TODO: change this
+      />
+    </Box>
   );
 }

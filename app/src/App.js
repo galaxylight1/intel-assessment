@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "./components/Navigation/Navbar";
 
 export default function App() {
   const [jsonData, setJsonData] = useState([]);
   useEffect(() => {
     fetch("/API_DATA.json")
       .then((response) => response.json())
-      .then((data) => setJsonData(data))
+      .then((data) => {
+        setJsonData(data);
+        console.log(Object.keys(data).length);
+      })
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
-  console.log(jsonData);
-  return <div>Hello world</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }

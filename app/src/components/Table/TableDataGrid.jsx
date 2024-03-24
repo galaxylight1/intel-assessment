@@ -11,11 +11,14 @@ const columns = [
     },
   },
   {
-    field: "product_collection",
+    field: "productCollection",
     headerName: "Product Collection",
     minWidth: 300,
+    valueGetter: (val) => {
+      return val;
+    },
     renderCell: (cellValues) => {
-      return cellValues.row.Essentials["Product Collection"];
+      return cellValues.row.productCollection;
     },
   },
   {
@@ -30,8 +33,10 @@ const columns = [
 
 export default function Table({ jsonData }) {
   // pre-processing
-  jsonData = jsonData.map((item) => ({
-    ...item,
+  jsonData = jsonData.map((item, idx) => ({
+    id: idx,
+    name: item.name,
+    productCollection: idx % 2 == 0 ? "abc" : "def",
     status: item.Essentials.Status,
   }));
 
@@ -41,13 +46,13 @@ export default function Table({ jsonData }) {
       <DataGrid
         // autoHeight
         getRowId={(row) => row.name}
-        rows={rows()}
+        rows={jsonData}
         columns={columns}
         headerHeight={50}
         rowHeight={50}
         // initialState={{
         //   sorting: {
-        //     sortModel: [{ field: "product_collection", sort: "asc" }],
+        //     sortModel: [{ field: "productCollection", sort: "asc" }],
         //   },
         // }}
         sx={{ marginLeft: { xs: "50px", md: "200px" } }} // TODO: change this

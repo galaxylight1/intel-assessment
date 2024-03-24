@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navigation/Navbar";
+import Sidebar from "./components/Navigation/Sidebar";
 
 export default function App() {
   const [jsonData, setJsonData] = useState([]);
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <div>
       <Navbar />
+      <Sidebar />
     </div>
   );
 }

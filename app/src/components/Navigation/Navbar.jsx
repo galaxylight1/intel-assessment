@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
 
 const styles = {
-  navBar: { minHeight: "8vh", boxShadow: "none", backgroundColor: "#0067B4" },
+  navBar: { boxShadow: "none", backgroundColor: "#0067B4" },
   toolBar: { height: "100%" },
 };
 

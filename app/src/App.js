@@ -15,7 +15,7 @@ const styles = {
 };
 
 let intialCategory = "Legacy Intel Xeon Processors";
-let count = 0;
+let categoryCount = 0;
 export default function App() {
   const [jsonData, setJsonData] = useState([]);
 
@@ -23,7 +23,7 @@ export default function App() {
     fetch("/API_DATA.json")
       .then((response) => response.json())
       .then((data) => {
-        data = Object.values(data);
+        data = Object.values(data).slice(0, 100);
         data = data.filter((item) => {
           if (item.name || item.status) return true;
         });
@@ -32,15 +32,15 @@ export default function App() {
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
-  useEffect(() => { // finding number of different product collections
+  useEffect(() => {
+    // finding number of different product collections
     jsonData.map((item) => {
       const currCategory = item.Essentials["Product Collection"];
       if (currCategory !== intialCategory) {
-        count++;
+        categoryCount++;
         intialCategory = currCategory;
       }
     });
-    console.log(count + 1);
   }, [jsonData]);
 
   return (

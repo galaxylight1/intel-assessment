@@ -1,12 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-// import CancelIcon from "@mui/icons-material/Cancel";
 
 const columns = [
   {
     field: "name",
     headerName: "Name",
-    minWidth: 150,
+    minWidth: 500,
     renderCell: (cellValues) => {
       return cellValues.row.name;
     },
@@ -14,7 +13,7 @@ const columns = [
   {
     field: "product_collection",
     headerName: "Product Collection",
-    minWidth: 100,
+    minWidth: 300,
     renderCell: (cellValues) => {
       return cellValues.row.Essentials["Product Collection"];
     },
@@ -22,14 +21,20 @@ const columns = [
   {
     field: "status",
     headerName: "Status",
-    minWidth: 100,
+    minWidth: 150,
     renderCell: (cellValues) => {
-      return cellValues.row.Essentials.Status;
+      return cellValues.row.status;
     },
   },
 ];
 
 export default function Table({ jsonData }) {
+  // pre-processing
+  jsonData = jsonData.map((item) => ({
+    ...item,
+    status: item.Essentials.Status,
+  }));
+
   const rows = () => [...jsonData];
   return (
     <Box sx={{ height: "100%" }}>
@@ -40,6 +45,11 @@ export default function Table({ jsonData }) {
         columns={columns}
         headerHeight={50}
         rowHeight={50}
+        // initialState={{
+        //   sorting: {
+        //     sortModel: [{ field: "product_collection", sort: "asc" }],
+        //   },
+        // }}
         sx={{ marginLeft: { xs: "50px", md: "200px" } }} // TODO: change this
       />
     </Box>

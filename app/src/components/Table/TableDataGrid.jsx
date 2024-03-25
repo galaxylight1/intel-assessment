@@ -61,7 +61,7 @@ export default function Table({ jsonData }) {
   const [isSnackbarVisible, SetIsSnackBarVisible] = useState(false);
 
   const handleOnSnackbarClick = () => {
-    navigate(`/compare`);
+    navigate(`/compare`, { state: jsonData });
   };
 
   // pre-processing, TODO: explore useEffect here

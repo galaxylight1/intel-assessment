@@ -1,6 +1,9 @@
 import { Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export default function Comparison() {
+  const { state } = useLocation();
+  console.log(state);
   return (
     <>
       <Typography

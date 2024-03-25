@@ -1,4 +1,4 @@
-import { Box, Typography, Collapse } from "@mui/material";
+import { Box, Typography, Collapse, Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -10,9 +10,11 @@ import {
   TableRow,
 } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 
 export default function Comparison() {
   const { state } = useLocation();
+  const [open, setOpen] = useState(false);
   return (
     <>
       <Typography
@@ -39,18 +41,28 @@ export default function Comparison() {
           sx={{
             boxShadow: "rgba(16, 24, 40, 0.05) 0px 1px 2px 0px",
             borderBottom: "1px solid #E0E0E0",
+            backgroundColor: "#0067B4",
+            paddingTop: "0.2rem",
+            paddingLeft: "0.5rem",
+            cursor: "pointer",
           }}
+          onClick={() => setOpen(!open)}
         >
           <Typography
             variant="h6"
             gutterBottom
             component="div"
-            sx={{ display: "flex", alignItems: "center", mt: 0.7 }}
+            sx={{ display: "flex", alignItems: "center", color: "white" }}
           >
-            <AddBoxIcon sx={{ color: "#0067B4", mr: 1.5 }} /> Essentials
+            {open ? (
+              <IndeterminateCheckBoxIcon sx={{ color: "white", mr: 1.5 }} />
+            ) : (
+              <AddBoxIcon sx={{ color: "white", mr: 1.5 }} />
+            )}{" "}
+            Essentials
           </Typography>
         </Box>
-        <Collapse in>
+        <Collapse in={open} timeout="auto" unmountOnExit>
           <Box>
             <Table>
               <TableHead>

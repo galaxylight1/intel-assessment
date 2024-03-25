@@ -69,7 +69,7 @@ export default function Table({ jsonData }) {
   };
 
   // pre-processing, TODO: explore useEffect here
-  jsonData = jsonData.map((item, idx) => ({
+  const newJsonData = jsonData.map((item, idx) => ({
     id: idx, // TODO: id: 27076 + idx,
     name: item.name,
     productCollection: item.Essentials["Product Collection"],
@@ -81,7 +81,7 @@ export default function Table({ jsonData }) {
     setRowSelectionModel(newRowSelectionModel);
   };
 
-  const rows = () => [...jsonData];
+  const rows = () => [...newJsonData];
 
   return (
     <Box sx={{ height: "100%" }}>

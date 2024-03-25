@@ -51,7 +51,18 @@ export default function CollapsibleTable({
               <TableBody>
                 {commonKeysArr.map((key, idx) => {
                   return (
-                    <TableRow key={idx}>
+                    <TableRow
+                      key={idx}
+                      sx={{
+                        "&:nth-of-type(odd)": {
+                          backgroundColor: "#F5F5F5",
+                        },
+                        // hide last border
+                        "&:last-child td, &:last-child th": {
+                          border: 0,
+                        },
+                      }}
+                    >
                       <TableCell align="left" sx={{ fontWeight: 600 }}>
                         {key}
                       </TableCell>

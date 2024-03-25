@@ -32,9 +32,9 @@ export default function Comparison() {
       </Typography>
       <Box
         sx={{
-          marginLeft: { xs: "3.8rem", md: "13.3rem" },
+          marginLeft: { xs: "3.7rem", md: "13.2rem" },
           marginTop: "2rem",
-          maxWidth: "30rem",
+          maxWidth: "27rem",
         }}
       >
         <Box
@@ -67,19 +67,25 @@ export default function Comparison() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left">Name</TableCell>
+                  <TableCell align="left" sx={{ fontWeight: 600 }}>
+                    Name
+                  </TableCell>
                   <TableCell align="left">y</TableCell>
                   <TableCell align="left">z</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell align="left">Status</TableCell>
+                  <TableCell align="left" sx={{ fontWeight: 600 }}>
+                    Status
+                  </TableCell>
                   <TableCell align="left">2</TableCell>
                   <TableCell align="left">3</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell align="left"># of Cores</TableCell>
+                  <TableCell align="left" sx={{ fontWeight: 600 }}>
+                    # of Cores
+                  </TableCell>
                   <TableCell align="left">2</TableCell>
                   <TableCell align="left">3</TableCell>
                 </TableRow>

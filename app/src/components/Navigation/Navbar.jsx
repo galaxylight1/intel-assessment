@@ -2,8 +2,19 @@ import { AppBar, Toolbar, Typography, Grid, Box } from "@mui/material";
 import logo from "../../logo.svg";
 
 const styles = {
-  navBar: { boxShadow: "none", backgroundColor: "#0067B4", height: "3.7rem" },
-  toolBar: { height: "100%", display: "flex", alignItems: "center" },
+  navBar: {
+    boxShadow: "none",
+    backgroundColor: "#0067B4",
+    height: "3.7rem",
+    ".MuiToolbar-root": {
+      paddingLeft: "0.8rem",
+    },
+  },
+  toolBar: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+  },
   logoBox: {
     width: 65,
     height: 65,

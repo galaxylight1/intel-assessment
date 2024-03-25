@@ -2,6 +2,11 @@ import { useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box, FormControlLabel, Switch } from "@mui/material";
 import customToolbar from "./CustomToolbar";
+import Snackbar from "@mui/material/Snackbar";
+import { SnackbarContent } from "@mui/material";
+import Slide from "@mui/material/Slide";
+import Alert from "@mui/material/Alert";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const columns = [
   {
@@ -49,11 +54,16 @@ const columns = [
   },
 ];
 
+function SlideTransition(props) {
+  return <Slide {...props} direction="up" />;
+}
+
 export default function Table({ jsonData }) {
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  const [isSnackbarVisible, SetIsSnackBarVisible] = useState(false);
 
-  // pre-processing
+  // pre-processing, TODO: explore useEffect here
   jsonData = jsonData.map((item, idx) => ({
     id: 1 + idx, // TODO: id: 27076 + idx,
     name: item.name,
@@ -67,7 +77,7 @@ export default function Table({ jsonData }) {
     <Box sx={{ height: "100%" }}>
       <Box sx={{ mb: 1, marginLeft: { xs: "3.5rem", md: "13rem" } }}>
         <FormControlLabel
-          label="Select two units"
+          label="Select two units for comparison"
           control={
             <Switch
               checked={checkboxSelection}
@@ -86,8 +96,6 @@ export default function Table({ jsonData }) {
           // TODO: change this slightly
           marginLeft: { xs: "50px", md: "200px" },
           minHeight: "10rem",
-          // disply: "flex",
-          // flexDirection: "column-reverse",
         }}
         autoHeight
         initialState={{
@@ -101,18 +109,33 @@ export default function Table({ jsonData }) {
           if (newRowSelectionModel.length > 2) {
             return;
           }
+          if (newRowSelectionModel.length === 2) {
+            SetIsSnackBarVisible(true);
+          }
+          if (newRowSelectionModel.length < 2) {
+            SetIsSnackBarVisible(false);
+          }
           setRowSelectionModel(newRowSelectionModel);
         }}
-        // disableColumnFilter
-        // disableColumnSelector
-        // disableDensitySelector
         slots={{ toolbar: customToolbar }}
-        // slotProps={{
-        //   toolbar: {
-        //     showQuickFilter: true,
-        //   },
-        // }}
       />
+      <Snackbar
+        open={isSnackbarVisible}
+        // onClose={() => {
+        // }}
+        TransitionComponent={Slide}
+        key="compareProducts"
+        autoHideDuration={1200}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <SnackbarContent
+          sx={{
+            backgroundColor: "#0067B4",
+          }}
+          message="Compare products"
+          action={<ArrowForwardIcon />}
+        ></SnackbarContent>
+      </Snackbar>
     </Box>
   );
 }

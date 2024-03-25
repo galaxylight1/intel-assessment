@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navigation/Navbar";
 import Sidebar from "./components/Navigation/Sidebar";
 import Table from "./components/Table/TableDataGrid";
-import { Typography } from "@mui/material";
+import Comparison from "./components/Comparison/Comparison";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
 
@@ -45,25 +46,20 @@ export default function App() {
   }, [jsonData]);
 
   return (
-    <div>
-      <Navbar />
-      <Sidebar />
-      <main style={styles.content}>
-        <Typography
-          variant="h6"
-          noWrap
-          sx={{
-            marginLeft: { xs: "3.5rem", md: "13rem" },
-            marginTop: "5rem",
-            marginBottom: "1rem",
-            fontSize: "2rem",
-            color: "#0067B4",
-          }}
-        >
-          All Processors
-        </Typography>
-        <Table jsonData={jsonData} />
-      </main>
-    </div>
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <Sidebar />
+        <main style={styles.content}>
+          <Routes>
+            <Route path="/" element={<Table jsonData={jsonData} />}></Route>
+          </Routes>
+          <Routes>
+            <Route path="/compare" element={<Comparison />}></Route>
+            <Route path="*" element={<Table jsonData={jsonData} />}></Route>
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }

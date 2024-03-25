@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { Box, FormControlLabel, Switch } from "@mui/material";
 import customToolbar from "./CustomToolbar";
 import Snackbar from "@mui/material/Snackbar";
-import { SnackbarContent } from "@mui/material";
+import { SnackbarContent, Typography } from "@mui/material";
 import Slide from "@mui/material/Slide";
-import Alert from "@mui/material/Alert";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   {
@@ -54,14 +54,15 @@ const columns = [
   },
 ];
 
-function SlideTransition(props) {
-  return <Slide {...props} direction="up" />;
-}
-
 export default function Table({ jsonData }) {
+  const navigate = useNavigate();
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
   const [isSnackbarVisible, SetIsSnackBarVisible] = useState(false);
+
+  const handleOnSnackbarClick = () => {
+    navigate(`/compare`);
+  };
 
   // pre-processing, TODO: explore useEffect here
   jsonData = jsonData.map((item, idx) => ({
@@ -75,9 +76,22 @@ export default function Table({ jsonData }) {
   const rows = () => [...jsonData];
   return (
     <Box sx={{ height: "100%" }}>
+      <Typography
+        variant="h6"
+        noWrap
+        sx={{
+          marginLeft: { xs: "3.5rem", md: "13rem" },
+          marginTop: "5rem",
+          marginBottom: "1rem",
+          fontSize: "2rem",
+          color: "#0067B4",
+        }}
+      >
+        All Processors
+      </Typography>
       <Box sx={{ mb: 1, marginLeft: { xs: "3.5rem", md: "13rem" } }}>
         <FormControlLabel
-          label="Select two units for comparison"
+          label="Select two products for comparison"
           control={
             <Switch
               checked={checkboxSelection}
@@ -121,9 +135,8 @@ export default function Table({ jsonData }) {
       />
       <Snackbar
         open={isSnackbarVisible}
-        // onClose={() => {
-        // }}
         TransitionComponent={Slide}
+        onClick={handleOnSnackbarClick}
         key="compareProducts"
         autoHideDuration={1200}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

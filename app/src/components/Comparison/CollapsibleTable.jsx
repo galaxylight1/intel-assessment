@@ -3,9 +3,7 @@ import { Box, Typography, Collapse } from "@mui/material";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
-
-const commonKeys = (obj1, obj2) =>
-  Object.keys(obj1).filter((key) => obj2.hasOwnProperty(key));
+import { commonKeys } from "../../utils/commonKeys";
 
 let commonKeysArr = [];
 

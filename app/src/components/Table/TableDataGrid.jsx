@@ -78,8 +78,7 @@ export default function Table({ jsonData }) {
   }));
 
   const handleRowSelectionModel = (newRowSelectionModel) => {
-    const ele = jsonData[newRowSelectionModel.slice(-1)];
-    if (ele) comparisonProductsArr.push(ele);
+    console.log("### selected Rows are -> ", newRowSelectionModel);
     setRowSelectionModel(newRowSelectionModel);
   };
 
@@ -130,16 +129,18 @@ export default function Table({ jsonData }) {
         }}
         checkboxSelection={checkboxSelection}
         rowSelectionModel={rowSelectionModel}
-        getSele
         onRowSelectionModelChange={(newRowSelectionModel) => {
           if (newRowSelectionModel.length > 2) {
             return;
           }
           if (newRowSelectionModel.length === 2) {
+            comparisonProductsArr = [
+              jsonData[newRowSelectionModel[0]],
+              jsonData[newRowSelectionModel[1]],
+            ];
             setIsSnackBarVisible(true);
           }
           if (newRowSelectionModel.length < 2) {
-            comparisonProductsArr.pop();
             setIsSnackBarVisible(false);
           }
           handleRowSelectionModel(newRowSelectionModel);

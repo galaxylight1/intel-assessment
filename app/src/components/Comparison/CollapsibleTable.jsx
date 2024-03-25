@@ -10,7 +10,14 @@ let commonKeysArr = [];
 export default function CollapsibleTable({ headerName, specificState }) {
   const obj1 = specificState[0];
   const obj2 = specificState[1];
-  commonKeysArr = commonKeys(obj1, obj2);
+
+  // TODO: temporary code
+  if (headerName === "name") headerName = "Name";
+  const doesObjectHasOnlyOneKey = typeof specificState[0] === "string"; // for name
+  if (doesObjectHasOnlyOneKey) {
+    commonKeysArr = [specificState[0], specificState[1]];
+  } else commonKeysArr = commonKeys(obj1, obj2);
+
   const [open, setOpen] = useState(headerName === "Essentials" ? true : false);
 
   return (

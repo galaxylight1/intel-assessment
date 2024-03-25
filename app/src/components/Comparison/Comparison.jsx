@@ -35,7 +35,9 @@ export default function Comparison() {
       </Typography>
 
       {commonKeysArr.map((key, idx) => {
-        if (key === "name") return;
+        {
+          /* if (key === "name") return;  */
+        }
         return (
           <CollapsibleTable
             key={idx}

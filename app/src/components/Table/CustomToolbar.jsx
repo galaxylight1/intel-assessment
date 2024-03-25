@@ -11,7 +11,17 @@ import { Box } from "@mui/material";
 
 export default function customToolbar() {
   return (
-    <GridToolbarContainer sx={{ marginTop: "0.1rem" }}>
+    <GridToolbarContainer
+      sx={{
+        marginTop: "0.1rem",
+        ".MuiToolbar-root": {
+          paddingLeft: "0.4rem",
+        },
+        ".MuiInputBase-root": {
+          marginLeft: "0.3em"
+        }
+      }}
+    >
       <GridToolbarColumnsButton />
       <GridToolbarFilterButton />
       <GridToolbarDensitySelector

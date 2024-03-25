@@ -24,8 +24,16 @@ export default function Comparison() {
       >
         Compare Products
       </Typography>
-      <CollapsibleTable />
-      <CollapsibleTable />
+      <CollapsibleTable headerName="Essentials" state={state} />
+      <CollapsibleTable headerName="Performance" state={state} />
+      <CollapsibleTable headerName="Supplemental Information" state={state} />
+      <CollapsibleTable headerName="Memory Specifications" state={state} />
+      <CollapsibleTable headerName="Processor Graphics" state={state} />
+      <CollapsibleTable headerName="Expansion Options" state={state} />
+      <CollapsibleTable headerName="I/O Specifications" state={state} />
+      <CollapsibleTable headerName="Package Specifications" state={state} />
+      <CollapsibleTable headerName="Advanced Technologies" state={state} />
+      <CollapsibleTable headerName="Security & Reliability" state={state} />
     </>
   );
 }

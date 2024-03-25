@@ -11,8 +11,8 @@ import {
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 
-export default function CollapsibleTable() {
-  const [open, setOpen] = useState(false);
+export default function CollapsibleTable({ headerName, state }) {
+  const [open, setOpen] = useState(headerName === "Essentials" ? true : false);
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function CollapsibleTable() {
         sx={{
           marginLeft: { xs: "3.7rem", md: "13.2rem" },
           marginTop: "2rem",
-          maxWidth: "27rem",
+          maxWidth: "30rem",
         }}
       >
         <Box
@@ -45,7 +45,7 @@ export default function CollapsibleTable() {
             ) : (
               <AddBoxIcon sx={{ color: "white", mr: 1.5 }} />
             )}{" "}
-            Essentials
+            {headerName}
           </Typography>
         </Box>
         <Collapse in={open} timeout="auto" unmountOnExit>
@@ -56,8 +56,8 @@ export default function CollapsibleTable() {
                   <TableCell align="left" sx={{ fontWeight: 600 }}>
                     Name
                   </TableCell>
-                  <TableCell align="left">2</TableCell>
-                  <TableCell align="left">3</TableCell>
+                  <TableCell align="left">{state[0].name}</TableCell>
+                  <TableCell align="left">{state[1].name}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

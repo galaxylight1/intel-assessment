@@ -18,8 +18,11 @@ export default function customToolbar() {
           paddingLeft: "0.4rem",
         },
         ".MuiInputBase-root": {
-          marginLeft: "0.3em"
-        }
+          marginLeft: "0.3rem",
+        },
+        ".MuiButtonBase-root": {
+          marginLeft: "0.3rem",
+        },
       }}
     >
       <GridToolbarColumnsButton />

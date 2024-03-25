@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapsibleTable from "./CollapsibleTable";
@@ -17,7 +16,6 @@ export default function Comparison() {
   const obj1 = state[0];
   const obj2 = state[1];
   commonKeysArr = commonKeys(obj1, obj2);
-  console.log("## state -> ", state);
   return (
     <>
       <Typography
@@ -35,14 +33,26 @@ export default function Comparison() {
       </Typography>
 
       {commonKeysArr.map((key, idx) => {
-        {
-          /* if (key === "name") return;  */
-        }
+        if (key === "name") return;
+
+        const obj1 = state[0][`${key}`];
+        const obj2 = state[1][`${key}`];
+        let innerCommonKeysArr = [];
+
+        // TODO: temporary code
+        const doesObjectHasOnlyOneKey = typeof obj1 === "string"; // for name
+        if (doesObjectHasOnlyOneKey) {
+          innerCommonKeysArr = [obj1, obj2];
+        } else innerCommonKeysArr = commonKeys(obj1, obj2);
+
+        if (innerCommonKeysArr.length === 0) return; // no common keys (ex. Supplemental Information)
+
         return (
           <CollapsibleTable
             key={idx}
-            headerName={key}
-            specificState={[state[0][`${key}`], state[1][`${key}`]]}
+            headerName={key === "name" ? "Name" : key}
+            specificState={[obj1, obj2]}
+            commonKeysArr={innerCommonKeysArr}
           />
         );
       })}

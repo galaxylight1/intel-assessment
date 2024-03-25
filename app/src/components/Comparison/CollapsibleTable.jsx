@@ -3,21 +3,12 @@ import { Box, Typography, Collapse } from "@mui/material";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
-import { commonKeys } from "../../utils/commonKeys";
 
-let commonKeysArr = [];
-
-export default function CollapsibleTable({ headerName, specificState }) {
-  const obj1 = specificState[0];
-  const obj2 = specificState[1];
-
-  // TODO: temporary code
-  if (headerName === "name") headerName = "Name";
-  const doesObjectHasOnlyOneKey = typeof specificState[0] === "string"; // for name
-  if (doesObjectHasOnlyOneKey) {
-    commonKeysArr = [specificState[0], specificState[1]];
-  } else commonKeysArr = commonKeys(obj1, obj2);
-
+export default function CollapsibleTable({
+  headerName,
+  specificState,
+  commonKeysArr,
+}) {
   const [open, setOpen] = useState(headerName === "Essentials" ? true : false);
 
   return (

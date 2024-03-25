@@ -14,7 +14,7 @@ const columns = [
     headerName: "ID",
     minWidth: 100,
     renderCell: (cellValues) => {
-      return cellValues.row.id;
+      return cellValues.row.id + 1;
     },
   },
   {

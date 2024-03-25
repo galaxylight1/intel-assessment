@@ -56,7 +56,6 @@ export default function App() {
           </Routes>
           <Routes>
             <Route path="/compare" element={<Comparison />}></Route>
-            <Route path="*" element={<Table jsonData={jsonData} />}></Route>
           </Routes>
         </main>
       </div>

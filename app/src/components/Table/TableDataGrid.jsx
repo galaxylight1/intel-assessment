@@ -144,6 +144,7 @@ export default function Table({ jsonData }) {
         <SnackbarContent
           sx={{
             backgroundColor: "#0067B4",
+            cursor: "pointer",
           }}
           message="Compare products"
           action={<ArrowForwardIcon />}

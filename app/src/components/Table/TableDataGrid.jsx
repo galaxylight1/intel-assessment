@@ -78,7 +78,6 @@ export default function Table({ jsonData }) {
   }));
 
   const handleRowSelectionModel = (newRowSelectionModel) => {
-    console.log("### selected Rows are -> ", newRowSelectionModel);
     setRowSelectionModel(newRowSelectionModel);
   };
 

@@ -26,6 +26,17 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         data = Object.values(data);
+        console.log(data);
+        let max = -1;
+        let obj = {};
+        data.map((key, idx) => {
+          let tempMax = Object.keys(data[idx]).length;
+          if (tempMax > max) {
+            max = tempMax;
+            obj = data[idx];
+          }
+        });
+        console.log(max, obj);
         data = data.filter((item) => {
           if (item.name || item.status) return true;
         });

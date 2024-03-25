@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, Typography, Grid, Box } from "@mui/material";
 import logo from "../../logo.svg";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   navBar: {
@@ -19,16 +20,18 @@ const styles = {
     width: 65,
     height: 65,
     height: "100%",
+    cursor: "pointer",
   },
 };
 
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
     <AppBar position="fixed" sx={styles.navBar}>
       <Toolbar sx={styles.toolBar}>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Box sx={styles.logoBox}>
+            <Box sx={styles.logoBox} onClick={() => navigate("/")}>
               <img src={logo} alt="Intel Logo" />
             </Box>
           </Grid>

@@ -1,5 +1,5 @@
 import { Box, Typography, Collapse, Button } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   Table,
@@ -13,8 +13,13 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 
 export default function Comparison() {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const [open, setOpen] = useState(false);
+  if (!state || state.length !== 2) {
+    navigate("/");
+    return;
+  }
   return (
     <>
       <Typography
@@ -70,8 +75,8 @@ export default function Comparison() {
                   <TableCell align="left" sx={{ fontWeight: 600 }}>
                     Name
                   </TableCell>
-                  <TableCell align="left">y</TableCell>
-                  <TableCell align="left">z</TableCell>
+                  <TableCell align="left">{state[0].name}</TableCell>
+                  <TableCell align="left">{state[1].name}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -79,15 +84,19 @@ export default function Comparison() {
                   <TableCell align="left" sx={{ fontWeight: 600 }}>
                     Status
                   </TableCell>
-                  <TableCell align="left">2</TableCell>
-                  <TableCell align="left">3</TableCell>
+                  <TableCell align="left">{state[0].status}</TableCell>
+                  <TableCell align="left">{state[1].status}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align="left" sx={{ fontWeight: 600 }}>
                     # of Cores
                   </TableCell>
-                  <TableCell align="left">2</TableCell>
-                  <TableCell align="left">3</TableCell>
+                  <TableCell align="left">
+                    {state[0].cores === 0 ? "-" : state[0].cores}
+                  </TableCell>
+                  <TableCell align="left">
+                    {state[1].cores === 0 ? "-" : state[1].cores}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>

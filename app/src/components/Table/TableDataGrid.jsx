@@ -54,26 +54,37 @@ const columns = [
   },
 ];
 
+let comparisonProductsArr = [];
+
 export default function Table({ jsonData }) {
   const navigate = useNavigate();
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
-  const [isSnackbarVisible, SetIsSnackBarVisible] = useState(false);
+  const [isSnackbarVisible, setIsSnackBarVisible] = useState(false);
 
   const handleOnSnackbarClick = () => {
-    navigate(`/compare`, { state: jsonData });
+    const passOnProductsArr = [...comparisonProductsArr];
+    comparisonProductsArr = []; // reset
+    navigate(`/compare`, { state: passOnProductsArr });
   };
 
   // pre-processing, TODO: explore useEffect here
   jsonData = jsonData.map((item, idx) => ({
-    id: 1 + idx, // TODO: id: 27076 + idx,
+    id: idx, // TODO: id: 27076 + idx,
     name: item.name,
     productCollection: item.Essentials["Product Collection"],
     status: item.Essentials.Status,
     cores: item.Performance ? parseInt(item.Performance["# of Cores"]) : 0,
   }));
 
+  const handleRowSelectionModel = (newRowSelectionModel) => {
+    const ele = jsonData[newRowSelectionModel.slice(-1)];
+    if (ele) comparisonProductsArr.push(ele);
+    setRowSelectionModel(newRowSelectionModel);
+  };
+
   const rows = () => [...jsonData];
+
   return (
     <Box sx={{ height: "100%" }}>
       <Typography
@@ -101,7 +112,7 @@ export default function Table({ jsonData }) {
         />
       </Box>
       <DataGrid
-        getRowId={(row) => row.name}
+        getRowId={(row) => row.id}
         rows={rows()}
         columns={columns}
         headerHeight={50}
@@ -119,17 +130,19 @@ export default function Table({ jsonData }) {
         }}
         checkboxSelection={checkboxSelection}
         rowSelectionModel={rowSelectionModel}
+        getSele
         onRowSelectionModelChange={(newRowSelectionModel) => {
           if (newRowSelectionModel.length > 2) {
             return;
           }
           if (newRowSelectionModel.length === 2) {
-            SetIsSnackBarVisible(true);
+            setIsSnackBarVisible(true);
           }
           if (newRowSelectionModel.length < 2) {
-            SetIsSnackBarVisible(false);
+            comparisonProductsArr.pop();
+            setIsSnackBarVisible(false);
           }
-          setRowSelectionModel(newRowSelectionModel);
+          handleRowSelectionModel(newRowSelectionModel);
         }}
         slots={{ toolbar: customToolbar }}
       />

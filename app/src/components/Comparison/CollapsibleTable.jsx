@@ -10,11 +10,9 @@ const commonKeys = (obj1, obj2) =>
 let commonKeysArr = [];
 
 export default function CollapsibleTable({ headerName, specificState }) {
-  if (headerName === "Package Specifications") {
-    const obj1 = specificState[0];
-    const obj2 = specificState[1];
-    commonKeysArr = commonKeys(obj1, obj2);
-  }
+  const obj1 = specificState[0];
+  const obj2 = specificState[1];
+  commonKeysArr = commonKeys(obj1, obj2);
   const [open, setOpen] = useState(headerName === "Essentials" ? true : false);
 
   return (

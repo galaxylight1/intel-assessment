@@ -3,6 +3,11 @@ import { Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapsibleTable from "./CollapsibleTable";
 
+const commonKeys = (obj1, obj2) =>
+  Object.keys(obj1).filter((key) => obj2.hasOwnProperty(key));
+
+let commonKeysArr = [];
+
 export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -10,6 +15,10 @@ export default function Comparison() {
     navigate("/");
     return;
   }
+
+  const obj1 = state[0];
+  const obj2 = state[1];
+  commonKeysArr = commonKeys(obj1, obj2);
   console.log("## state -> ", state);
   return (
     <>
@@ -26,27 +35,16 @@ export default function Comparison() {
       >
         Compare Products
       </Typography>
-      {/* <CollapsibleTable headerName="Essentials" state={state} />
-      <CollapsibleTable headerName="Performance" state={state} />
-      <CollapsibleTable headerName="Supplemental Information" state={state} />
-      <CollapsibleTable headerName="Memory Specifications" state={state} />
-      <CollapsibleTable headerName="Processor Graphics" state={state} />
-      <CollapsibleTable headerName="Expansion Options" state={state} />
-      <CollapsibleTable headerName="I/O Specifications" state={state} /> */}
-      {state[0]["Package Specifications"] &&
-      state[1]["Package Specifications"] ? (
-        <CollapsibleTable
-          headerName="Package Specifications"
-          specificState={[
-            state[0]["Package Specifications"],
-            state[1]["Package Specifications"],
-          ]}
-        />
-      ) : (
-        <></>
-      )}
-      {/* <CollapsibleTable headerName="Advanced Technologies" state={state} />
-      <CollapsibleTable headerName="Security & Reliability" state={state} /> */}
+
+      {commonKeysArr.map((key, idx) => {
+        if (key === "name") return;
+        return (
+          <CollapsibleTable
+            headerName={key}
+            specificState={[state[0][`${key}`], state[1][`${key}`]]}
+          />
+        );
+      })}
     </>
   );
 }

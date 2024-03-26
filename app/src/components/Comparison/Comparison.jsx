@@ -60,11 +60,11 @@ export default function Comparison() {
       </Typography>
       <Grid
         container
-        // width="vw"
+        width="100vw"
         // justifyContent="space-between"
         sx={{
           paddingLeft: { xs: "3.7rem", md: "13.2rem" },
-          paddingRight: "0.5rem",
+          paddingRight: "1.5rem",
           display: "flex",
         }}
       >

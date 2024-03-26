@@ -4,6 +4,7 @@ import Sidebar from "./components/Navigation/Sidebar";
 import Table from "./components/Table/TableDataGrid";
 import Comparison from "./components/Comparison/Comparison";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./utils/scrollToTop";
 
 const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
 
@@ -49,6 +50,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div>
         <Navbar />
         <Sidebar />

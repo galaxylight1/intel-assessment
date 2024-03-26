@@ -6,6 +6,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { Grid } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import SquareIcon from "@mui/icons-material/Square";
 
 let commonKeysArr = [];
 
@@ -52,7 +53,9 @@ export default function Comparison() {
           alignItems: "center",
         }}
       >
+        <SquareIcon sx={{ color: "#05B1AF", mr: "0.5rem" }} />
         {state[0].name} <CompareArrowsIcon sx={{ mr: "1rem", ml: "1rem" }} />{" "}
+        <SquareIcon sx={{ color: "#2D96FF", mr: "0.5rem" }} />
         {state[1].name}
       </Typography>
       <Grid
@@ -61,7 +64,7 @@ export default function Comparison() {
         // justifyContent="space-between"
         sx={{
           paddingLeft: { xs: "3.7rem", md: "13.2rem" },
-          paddingRight: "1.5rem",
+          paddingRight: "0.5rem",
           display: "flex",
         }}
       >

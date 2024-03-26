@@ -90,7 +90,7 @@ export default function Table({ jsonData }) {
         variant="h6"
         noWrap
         sx={{
-          marginLeft: { xs: "3.5rem", md: "13rem" },
+          marginLeft: { xs: "3.2rem", md: "12.7rem" },
           marginTop: "5rem",
           marginBottom: "1rem",
           fontSize: "2rem",

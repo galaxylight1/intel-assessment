@@ -29,7 +29,7 @@ export default function Comparison() {
       <Typography
         variant="h6"
         sx={{
-          marginLeft: { xs: "3.5rem", md: "13rem" },
+          marginLeft: { xs: "3.2rem", md: "12.7rem" },
           marginTop: "5rem",
           marginBottom: "1rem",
           fontSize: "2rem",
@@ -55,8 +55,28 @@ export default function Comparison() {
         {state[0].name} <CompareArrowsIcon sx={{ mr: "1rem", ml: "1rem" }} />{" "}
         {state[1].name}
       </Typography>
-      <Grid container spacing={0}>
-        <Grid item md={7}>
+      <Grid
+        container
+        // width="vw"
+        // justifyContent="space-between"
+        sx={{
+          paddingLeft: { xs: "3.7rem", md: "13.2rem" },
+          paddingRight: "1.5rem",
+          display: "flex",
+        }}
+      >
+        <Grid item mt={3} md={6} xs={12}>
+          <BarChart
+            // width={570}
+            height={600}
+            series={[
+              { data: aData, label: "A", id: "aId" },
+              { data: bData, label: "B", id: "bId" },
+            ]}
+            xAxis={[{ data: labels, scaleType: "band" }]}
+          />
+        </Grid>
+        <Grid item md={6} xs={12}>
           {commonKeysArr.map((key, idx) => {
             if (key === "name") return;
 
@@ -81,17 +101,6 @@ export default function Comparison() {
               />
             );
           })}
-        </Grid>
-        <Grid item md={5} mt={2}>
-          <BarChart
-            width={570}
-            height={600}
-            series={[
-              { data: aData, label: "A", id: "aId" },
-              { data: bData, label: "B", id: "bId" },
-            ]}
-            xAxis={[{ data: labels, scaleType: "band" }]}
-          />
         </Grid>
       </Grid>
     </>

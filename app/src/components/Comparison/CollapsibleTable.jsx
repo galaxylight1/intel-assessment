@@ -15,9 +15,9 @@ export default function CollapsibleTable({
     <>
       <Box
         sx={{
-          marginLeft: { xs: "3.7rem", md: "13.2rem" },
+          // marginLeft: { xs: "3.7rem", md: "13.2rem" },
           marginTop: "2rem",
-          maxWidth: "33rem",
+          // maxWidth: "33rem",
         }}
       >
         <Box

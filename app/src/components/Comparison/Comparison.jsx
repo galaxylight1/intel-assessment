@@ -46,7 +46,7 @@ export default function Comparison() {
     )[3];
 
     // setBarChartData([true, barChartArr1, barChartArr2, unit]);
-    barChartData = [true, barChartArr1, barChartArr2, unit];
+    barChartData = [true, barChartArr1, barChartArr2, unit]; // since barChartData can be derived from 'state', it will not be it's own state
   }
   // }, [state]);
 

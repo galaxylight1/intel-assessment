@@ -13,6 +13,11 @@ const labels = ["# of Cores", "Processor Base Frequency", "Cache"];
 export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  if (!state || state.length !== 2) {
+    navigate("/");
+    return;
+  }
+
   let barCharts = [];
   let barChartData = {}; // initialize bar chart, since barChartData can be derived from 'state', it will not be it's own state
 
@@ -25,14 +30,15 @@ export default function Comparison() {
     const innerObj1 = state[0]["Performance"];
     const innerObj2 = state[1]["Performance"];
 
-    labels.map((key) => {
+    labels.map((label) => {
+      if (!innerObj1[label] || !innerObj2[label]) return; // if the value doesn't exist in any of the objects (obj1 and obj2) then we can skip it because comparison is not possible
       // barChartData = {}; // reset
 
       // console.log(key);
-      let split1 = innerObj1[key].split(" ");
-      let split2 = innerObj2[key].split(" ");
-      let barChartArr1 = [split1 ? split1[0] : innerObj1[key]];
-      let barChartArr2 = [split2 ? split2[0] : innerObj2[key]];
+      let split1 = innerObj1[label].split(" ");
+      let split2 = innerObj2[label].split(" ");
+      let barChartArr1 = [split1 ? split1[0] : innerObj1[label]];
+      let barChartArr2 = [split2 ? split2[0] : innerObj2[label]];
       // console.log(barChartArr1, barChartArr2);
 
       const unit1 = split1 ? split1[1] : "";
@@ -43,16 +49,11 @@ export default function Comparison() {
         aData: barChartArr1,
         bData: barChartArr2,
         unit: unit1 ? unit1 : "Unit",
-        name: [key],
+        name: [label],
       };
 
       barCharts.push({ ...barChartData });
     });
-  }
-
-  if (!state || state.length !== 2) {
-    navigate("/");
-    return;
   }
 
   return (

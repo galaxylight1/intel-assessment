@@ -1,25 +1,20 @@
-import { Typography } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapsibleTable from "./CollapsibleTable";
 import { commonKeys } from "../../utils/commonKeys";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { Grid } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SquareIcon from "@mui/icons-material/Square";
 
 let commonKeysArr = [];
-const labels = ["Processor Base Frequency"];
+const labels = ["# of Cores", "Processor Base Frequency", "Cache"];
 
 export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  let barChartData = {
-    isVisible: false,
-    aData: [0, 0, 0],
-    bData: [0, 0, 0],
-    unit: "Unit",
-  }; // initial bar chart values, since barChartData can be derived from 'state', it will not be it's own state
+  let barCharts = [];
+  let barChartData = {}; // initialize bar chart, since barChartData can be derived from 'state', it will not be it's own state
 
   const obj1 = state[0];
   const obj2 = state[1];
@@ -30,27 +25,29 @@ export default function Comparison() {
     const innerObj1 = state[0]["Performance"];
     const innerObj2 = state[1]["Performance"];
 
-    const barChartArr1 = [
-      innerObj1["Processor Base Frequency"].match(/^(\d+(\.\d+)?)\s*(\w+)$/)[1],
-    ];
-    const barChartArr2 = [
-      innerObj2["Processor Base Frequency"].match(/^(\d+(\.\d+)?)\s*(\w+)$/)[1],
-    ];
+    labels.map((key) => {
+      // barChartData = {}; // reset
 
-    const unit1 = innerObj1["Processor Base Frequency"].match(
-      /^(\d+(\.\d+)?)\s*(\w+)$/
-    )[3];
+      // console.log(key);
+      let split1 = innerObj1[key].split(" ");
+      let split2 = innerObj2[key].split(" ");
+      let barChartArr1 = [split1 ? split1[0] : innerObj1[key]];
+      let barChartArr2 = [split2 ? split2[0] : innerObj2[key]];
+      // console.log(barChartArr1, barChartArr2);
 
-    const unit2 = innerObj2["Processor Base Frequency"].match(
-      /^(\d+(\.\d+)?)\s*(\w+)$/
-    )[3];
+      const unit1 = split1 ? split1[1] : "";
+      const unit2 = split2 ? split2[1] : "";
 
-    barChartData = {
-      isVisible: unit1 === unit2 ? true : false, // we only show barChart if both units are same
-      aData: barChartArr1,
-      bData: barChartArr2,
-      unit1,
-    };
+      barChartData = {
+        isVisible: unit1 === unit2 ? true : false, // we only show bar chart if both units are same
+        aData: barChartArr1,
+        bData: barChartArr2,
+        unit: unit1 ? unit1 : "Unit",
+        name: [key],
+      };
+
+      barCharts.push({ ...barChartData });
+    });
   }
 
   if (!state || state.length !== 2) {
@@ -101,22 +98,33 @@ export default function Comparison() {
           display: "flex",
         }}
       >
-        {barChartData.isVisible ? (
-          <Grid item mt={3} md={6} xs={12}>
-            <BarChart
-              // width={570}
-              height={600}
-              series={[
-                { data: barChartData.aData, label: "Product 1", id: "aId" },
-                { data: barChartData.bData, label: "Product 2", id: "bId" },
-              ]}
-              xAxis={[{ data: labels, scaleType: "band" }]}
-              yAxis={[{ label: barChartData.unit }]}
-            />
-          </Grid>
-        ) : (
-          <></>
-        )}
+        {barCharts.map((barChartData, idx) => {
+          if (barChartData.isVisible) {
+            return (
+              <Grid key={idx} item mt={3} md={6} xs={12}>
+                <BarChart
+                  // width={570}
+                  height={500}
+                  series={[
+                    {
+                      data: barChartData.aData,
+                      // label: state[0].name,
+                      id: "aId",
+                    },
+                    {
+                      data: barChartData.bData,
+                      // label: state[1].name,
+                      id: "bId",
+                    },
+                  ]}
+                  xAxis={[{ data: barChartData.name, scaleType: "band" }]}
+                  yAxis={[{ label: barChartData.unit }]}
+                  grid={{ horizontal: true }}
+                />
+              </Grid>
+            );
+          } else return <></>;
+        })}
         <Grid item md={6} xs={12}>
           {commonKeysArr.map((key, idx) => {
             if (key === "name") return;

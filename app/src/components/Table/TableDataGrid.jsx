@@ -7,6 +7,7 @@ import { SnackbarContent, Typography } from "@mui/material";
 import Slide from "@mui/material/Slide";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
+import MemoryIcon from "@mui/icons-material/Memory";
 
 const columns = [
   {
@@ -94,9 +95,11 @@ export default function Table({ jsonData }) {
           marginBottom: "1rem",
           fontSize: "2rem",
           color: "#0067B4",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        All Processors
+        <MemoryIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> All Processors
       </Typography>
       <Box sx={{ mb: 1, marginLeft: { xs: "3.5rem", md: "13rem" } }}>
         <FormControlLabel

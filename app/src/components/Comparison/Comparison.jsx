@@ -4,6 +4,8 @@ import CollapsibleTable from "./CollapsibleTable";
 import { commonKeys } from "../../utils/commonKeys";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { Grid } from "@mui/material";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 
 let commonKeysArr = [];
 
@@ -26,16 +28,33 @@ export default function Comparison() {
     <>
       <Typography
         variant="h6"
-        noWrap
         sx={{
           marginLeft: { xs: "3.5rem", md: "13rem" },
           marginTop: "5rem",
           marginBottom: "1rem",
           fontSize: "2rem",
           color: "#0067B4",
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        Compare Products
+        <BarChartIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> Compare
+        Products
+      </Typography>
+      <Typography
+        sx={{
+          marginLeft: { xs: "3.5rem", md: "13rem" },
+          marginTop: "1rem",
+          marginBottom: "0.5rem",
+          fontSize: "1.1rem",
+          color: "#0067B4",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {state[0].name}{" "}
+        <CompareArrowsIcon sx={{ mr: "1rem", ml: "1rem" }} />{" "}
+        {state[1].name}
       </Typography>
       <Grid container spacing={0}>
         <Grid item md={7}>

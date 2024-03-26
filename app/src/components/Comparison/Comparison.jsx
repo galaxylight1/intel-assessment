@@ -48,7 +48,7 @@ export default function Comparison() {
         isVisible: unit1 === unit2 ? true : false, // we only show bar chart if both units are same
         aData: barChartArr1,
         bData: barChartArr2,
-        unit: unit1 ? unit1 : "Unit",
+        unit: unit1 ? unit1 : "Cores",
         name: [label],
       };
 
@@ -99,10 +99,10 @@ export default function Comparison() {
           display: "flex",
         }}
       >
-        {barCharts.map((barChartData, idx) => {
-          if (barChartData.isVisible) {
-            return (
-              <Grid key={idx} item mt={3} md={6} xs={12}>
+        <Grid item mt={3} md={6} xs={12}>
+          {barCharts.map((barChartData, idx) => {
+            if (barChartData.isVisible) {
+              return (
                 <BarChart
                   // width={570}
                   height={500}
@@ -122,11 +122,11 @@ export default function Comparison() {
                   yAxis={[{ label: barChartData.unit }]}
                   grid={{ horizontal: true }}
                 />
-              </Grid>
-            );
-          } else return <></>;
-        })}
-        <Grid item md={6} xs={12}>
+              );
+            } else return <></>;
+          })}
+        </Grid>
+        <Grid item md={barCharts.length > 0 ? 6 : 12} xs={12}>
           {commonKeysArr.map((key, idx) => {
             if (key === "name") return;
 

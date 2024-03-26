@@ -7,9 +7,9 @@ import { Grid } from "@mui/material";
 
 let commonKeysArr = [];
 
-const uData = [4000, 3000, 2000, 2780];
-const pData = [2400, 1398, 9800, 3908];
-const xLabels = ["Page A", "Page B", "Page C", "Page D"];
+const aData = [2400, 1398, 9800, 3908];
+const bData = [4000, 3000, 2000, 2780];
+const labels = ["Cache", "Processor Base Frequency", "Bus Speed", "Cores"];
 
 export default function Comparison() {
   const navigate = useNavigate();
@@ -64,15 +64,15 @@ export default function Comparison() {
             );
           })}
         </Grid>
-        <Grid item md={5}>
+        <Grid item md={5} mt={3}>
           <BarChart
             width={600}
             height={300}
             series={[
-              { data: pData, label: "pv", id: "pvId" },
-              { data: uData, label: "uv", id: "uvId" },
+              { data: aData, label: "A", id: "aId" },
+              { data: bData, label: "B", id: "bId" },
             ]}
-            xAxis={[{ data: xLabels, scaleType: "band" }]}
+            xAxis={[{ data: labels, scaleType: "band" }]}
           />
         </Grid>
       </Grid>

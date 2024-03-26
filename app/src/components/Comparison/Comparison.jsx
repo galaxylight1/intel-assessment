@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapsibleTable from "./CollapsibleTable";
@@ -30,28 +29,27 @@ export default function Comparison() {
   if (commonKeysArr.includes("Performance")) {
     const innerObj1 = state[0]["Performance"];
     const innerObj2 = state[1]["Performance"];
-    // console.log([innerObj1, innerObj2]);
 
     const barChartArr1 = [
-      // innerObj1["Cache"].match(/\d+(\.\d+)?/)[0],
       innerObj1["Processor Base Frequency"].match(/^(\d+(\.\d+)?)\s*(\w+)$/)[1],
-      // innerObj1["# of Cores"].match(/\d+(\.\d+)?/)[0],
     ];
     const barChartArr2 = [
-      // innerObj2["Cache"].match(/\d+(\.\d+)?/)[0],
       innerObj2["Processor Base Frequency"].match(/^(\d+(\.\d+)?)\s*(\w+)$/)[1],
-      // innerObj2["# of Cores"].match(/\d+(\.\d+)?/)[0],
     ];
 
-    const unit = innerObj1["Processor Base Frequency"].match(
+    const unit1 = innerObj1["Processor Base Frequency"].match(
+      /^(\d+(\.\d+)?)\s*(\w+)$/
+    )[3];
+
+    const unit2 = innerObj2["Processor Base Frequency"].match(
       /^(\d+(\.\d+)?)\s*(\w+)$/
     )[3];
 
     barChartData = {
-      isVisible: true,
+      isVisible: unit1 === unit2 ? true : false, // we only show barChart if both units are same
       aData: barChartArr1,
       bData: barChartArr2,
-      unit,
+      unit1,
     };
   }
 

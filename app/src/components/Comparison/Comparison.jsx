@@ -17,47 +17,38 @@ const labels = ["Processor Base Frequency"];
 export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [barChartData, setBarChartData] = useState([
-    false,
-    [0, 0, 0],
-    [0, 0, 0],
-    "Unit",
-  ]); // initial bar chart values
+  let barChartData = [false, [0, 0, 0], [0, 0, 0], "Unit"]; // initial bar chart values
 
-  useEffect(() => {
-    const obj1 = state[0];
-    const obj2 = state[1];
-    commonKeysArr = commonKeys(obj1, obj2);
+  // useEffect(() => {
+  const obj1 = state[0];
+  const obj2 = state[1];
+  commonKeysArr = commonKeys(obj1, obj2);
 
-    // for bar chart
-    // console.log('reached here..');
-    if (commonKeysArr.includes("Performance")) {
-      const innerObj1 = state[0]["Performance"];
-      const innerObj2 = state[1]["Performance"];
-      // console.log([innerObj1, innerObj2]);
+  // for bar chart
+  if (commonKeysArr.includes("Performance")) {
+    const innerObj1 = state[0]["Performance"];
+    const innerObj2 = state[1]["Performance"];
+    // console.log([innerObj1, innerObj2]);
 
-      const barChartArr1 = [
-        // innerObj1["Cache"].match(/\d+(\.\d+)?/)[0],
-        innerObj1["Processor Base Frequency"].match(
-          /^(\d+(\.\d+)?)\s*(\w+)$/
-        )[1],
-        // innerObj1["# of Cores"].match(/\d+(\.\d+)?/)[0],
-      ];
-      const barChartArr2 = [
-        // innerObj2["Cache"].match(/\d+(\.\d+)?/)[0],
-        innerObj2["Processor Base Frequency"].match(
-          /^(\d+(\.\d+)?)\s*(\w+)$/
-        )[1],
-        // innerObj2["# of Cores"].match(/\d+(\.\d+)?/)[0],
-      ];
+    const barChartArr1 = [
+      // innerObj1["Cache"].match(/\d+(\.\d+)?/)[0],
+      innerObj1["Processor Base Frequency"].match(/^(\d+(\.\d+)?)\s*(\w+)$/)[1],
+      // innerObj1["# of Cores"].match(/\d+(\.\d+)?/)[0],
+    ];
+    const barChartArr2 = [
+      // innerObj2["Cache"].match(/\d+(\.\d+)?/)[0],
+      innerObj2["Processor Base Frequency"].match(/^(\d+(\.\d+)?)\s*(\w+)$/)[1],
+      // innerObj2["# of Cores"].match(/\d+(\.\d+)?/)[0],
+    ];
 
-      const unit = innerObj1["Processor Base Frequency"].match(
-        /^(\d+(\.\d+)?)\s*(\w+)$/
-      )[3];
+    const unit = innerObj1["Processor Base Frequency"].match(
+      /^(\d+(\.\d+)?)\s*(\w+)$/
+    )[3];
 
-      setBarChartData([true, barChartArr1, barChartArr2, unit]);
-    }
-  }, [state]);
+    // setBarChartData([true, barChartArr1, barChartArr2, unit]);
+    barChartData = [true, barChartArr1, barChartArr2, unit];
+  }
+  // }, [state]);
 
   if (!state || state.length !== 2) {
     navigate("/");

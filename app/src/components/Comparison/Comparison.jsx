@@ -52,8 +52,7 @@ export default function Comparison() {
           alignItems: "center",
         }}
       >
-        {state[0].name}{" "}
-        <CompareArrowsIcon sx={{ mr: "1rem", ml: "1rem" }} />{" "}
+        {state[0].name} <CompareArrowsIcon sx={{ mr: "1rem", ml: "1rem" }} />{" "}
         {state[1].name}
       </Typography>
       <Grid container spacing={0}>
@@ -83,10 +82,10 @@ export default function Comparison() {
             );
           })}
         </Grid>
-        <Grid item md={5} mt={3}>
+        <Grid item md={5} mt={2}>
           <BarChart
-            width={600}
-            height={300}
+            width={570}
+            height={600}
             series={[
               { data: aData, label: "A", id: "aId" },
               { data: bData, label: "B", id: "bId" },

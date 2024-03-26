@@ -10,16 +10,18 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SquareIcon from "@mui/icons-material/Square";
 
 let commonKeysArr = [];
-// const aData = [2, 3, 1];
-// const bData = [2, 3.2, 1];
 const labels = ["Processor Base Frequency"];
 
 export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  let barChartData = [false, [0, 0, 0], [0, 0, 0], "Unit"]; // initial bar chart values
+  let barChartData = {
+    isVisible: false,
+    aData: [0, 0, 0],
+    bData: [0, 0, 0],
+    unit: "Unit",
+  }; // initial bar chart values, since barChartData can be derived from 'state', it will not be it's own state
 
-  // useEffect(() => {
   const obj1 = state[0];
   const obj2 = state[1];
   commonKeysArr = commonKeys(obj1, obj2);
@@ -45,10 +47,13 @@ export default function Comparison() {
       /^(\d+(\.\d+)?)\s*(\w+)$/
     )[3];
 
-    // setBarChartData([true, barChartArr1, barChartArr2, unit]);
-    barChartData = [true, barChartArr1, barChartArr2, unit]; // since barChartData can be derived from 'state', it will not be it's own state
+    barChartData = {
+      isVisible: true,
+      aData: barChartArr1,
+      bData: barChartArr2,
+      unit,
+    };
   }
-  // }, [state]);
 
   if (!state || state.length !== 2) {
     navigate("/");
@@ -98,17 +103,17 @@ export default function Comparison() {
           display: "flex",
         }}
       >
-        {barChartData[0] ? (
+        {barChartData.isVisible ? (
           <Grid item mt={3} md={6} xs={12}>
             <BarChart
               // width={570}
               height={600}
               series={[
-                { data: barChartData[1], label: "Product 1", id: "aId" },
-                { data: barChartData[2], label: "Product 2", id: "bId" },
+                { data: barChartData.aData, label: "Product 1", id: "aId" },
+                { data: barChartData.bData, label: "Product 2", id: "bId" },
               ]}
               xAxis={[{ data: labels, scaleType: "band" }]}
-              yAxis={[{ label: barChartData[3] }]}
+              yAxis={[{ label: barChartData.unit }]}
             />
           </Grid>
         ) : (
@@ -129,18 +134,6 @@ export default function Comparison() {
             } else innerCommonKeysArr = commonKeys(obj1, obj2);
 
             if (innerCommonKeysArr.length === 0) return; // no common keys (ex. Supplemental Information)
-
-            // for bar chart
-            /* const aData = [];
-            const bData = [];
-            if (key === "Performance") {
-              innerCommonKeysArr.map((key, idx) => {
-                aData.push(obj1[key]);
-                bData.push(obj2[key]);
-              });
-
-              setBarChartData([aData, bData]);
-            } */
 
             return (
               <CollapsibleTable

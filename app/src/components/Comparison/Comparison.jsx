@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapsibleTable from "./CollapsibleTable";
@@ -9,22 +10,59 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SquareIcon from "@mui/icons-material/Square";
 
 let commonKeysArr = [];
-
-const aData = [2, 3, 1];
-const bData = [2, 3.2, 1];
-const labels = ["Cache (MB)", "Processor Base Frequency (GHz)", "Cores"];
+// const aData = [2, 3, 1];
+// const bData = [2, 3.2, 1];
+const labels = ["Processor Base Frequency"];
 
 export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [barChartData, setBarChartData] = useState([
+    [0, 0, 0],
+    [0, 0, 0],
+    "Unit",
+  ]); // initial bar chart values
+
+  useEffect(() => {
+    const obj1 = state[0];
+    const obj2 = state[1];
+    commonKeysArr = commonKeys(obj1, obj2);
+
+    // for bar chart
+    if (commonKeysArr.includes("Performance")) {
+      const innerObj1 = state[0]["Performance"];
+      const innerObj2 = state[1]["Performance"];
+
+      console.log([innerObj1, innerObj2]);
+
+      const barChartArr1 = [
+        // innerObj1["Cache"].match(/\d+(\.\d+)?/)[0],
+        innerObj1["Processor Base Frequency"].match(
+          /^(\d+(\.\d+)?)\s*(\w+)$/
+        )[1],
+        // innerObj1["# of Cores"].match(/\d+(\.\d+)?/)[0],
+      ];
+      const barChartArr2 = [
+        // innerObj2["Cache"].match(/\d+(\.\d+)?/)[0],
+        innerObj2["Processor Base Frequency"].match(
+          /^(\d+(\.\d+)?)\s*(\w+)$/
+        )[1],
+        // innerObj2["# of Cores"].match(/\d+(\.\d+)?/)[0],
+      ];
+
+      const unit = innerObj1["Processor Base Frequency"].match(
+        /^(\d+(\.\d+)?)\s*(\w+)$/
+      )[3];
+
+      setBarChartData([barChartArr1, barChartArr2, unit]);
+    }
+  }, []);
+
   if (!state || state.length !== 2) {
     navigate("/");
     return;
   }
 
-  const obj1 = state[0];
-  const obj2 = state[1];
-  commonKeysArr = commonKeys(obj1, obj2);
   return (
     <>
       <Typography
@@ -73,11 +111,11 @@ export default function Comparison() {
             // width={570}
             height={600}
             series={[
-              { data: aData, label: "Product 1", id: "aId" },
-              { data: bData, label: "Product 2", id: "bId" },
+              { data: barChartData[0], label: "Product 1", id: "aId" },
+              { data: barChartData[1], label: "Product 2", id: "bId" },
             ]}
             xAxis={[{ data: labels, scaleType: "band" }]}
-            yAxis={[{ label: "Unit" }]}
+            yAxis={[{ label: barChartData[2] }]}
           />
         </Grid>
         <Grid item md={6} xs={12}>
@@ -97,9 +135,16 @@ export default function Comparison() {
             if (innerCommonKeysArr.length === 0) return; // no common keys (ex. Supplemental Information)
 
             // for bar chart
+            /* const aData = [];
+            const bData = [];
             if (key === "Performance") {
-              // do something
-            }
+              innerCommonKeysArr.map((key, idx) => {
+                aData.push(obj1[key]);
+                bData.push(obj2[key]);
+              });
+
+              setBarChartData([aData, bData]);
+            } */
 
             return (
               <CollapsibleTable

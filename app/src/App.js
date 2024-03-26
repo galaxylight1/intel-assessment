@@ -12,7 +12,7 @@ const styles = {
   content: {
     // marginLeft: "1rem",
     paddingLeft: "0.5rem",
-    paddingRight: "0.3rem"
+    paddingRight: "0.3rem",
     // marginTop: "4.5rem",
     // marginBottom: "1rem",
   },
@@ -41,11 +41,14 @@ export default function App() {
   // useEffect(() => {
   //   // finding number of different product collections
   //   jsonData.map((item) => {
-  //     const currCategory = item.Essentials["Product Collection"];
-  //     if (currCategory !== intialCategory) {
-  //       categoryCount++;
-  //       intialCategory = currCategory;
-  //     }
+  //     // const currCategory = item.Essentials["Product Collection"];
+  //     // if (currCategory !== intialCategory) {
+  //     //   categoryCount++;
+  //     //   intialCategory = currCategory;
+  //     // }
+
+  //     if (item["Performance"] && item["Performance"]["Processor Base Frequency"])
+  //       console.log(item["Performance"]["Processor Base Frequency"]);
   //   });
   // }, [jsonData]);
 

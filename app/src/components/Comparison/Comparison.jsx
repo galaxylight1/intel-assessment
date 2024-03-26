@@ -10,9 +10,9 @@ import SquareIcon from "@mui/icons-material/Square";
 
 let commonKeysArr = [];
 
-const aData = [2400, 1398, 9800, 3908];
-const bData = [4000, 3000, 2000, 2780];
-const labels = ["Cache", "Processor Base Frequency", "Bus Speed", "Cores"];
+const aData = [2, 3, 1];
+const bData = [2, 3.2, 1];
+const labels = ["Cache (MB)", "Processor Base Frequency (GHz)", "Cores"];
 
 export default function Comparison() {
   const navigate = useNavigate();
@@ -73,10 +73,11 @@ export default function Comparison() {
             // width={570}
             height={600}
             series={[
-              { data: aData, label: "A", id: "aId" },
-              { data: bData, label: "B", id: "bId" },
+              { data: aData, label: "Product 1", id: "aId" },
+              { data: bData, label: "Product 2", id: "bId" },
             ]}
             xAxis={[{ data: labels, scaleType: "band" }]}
+            yAxis={[{ label: "Unit" }]}
           />
         </Grid>
         <Grid item md={6} xs={12}>
@@ -94,6 +95,11 @@ export default function Comparison() {
             } else innerCommonKeysArr = commonKeys(obj1, obj2);
 
             if (innerCommonKeysArr.length === 0) return; // no common keys (ex. Supplemental Information)
+
+            // for bar chart
+            if (key === "Performance") {
+              // do something
+            }
 
             return (
               <CollapsibleTable

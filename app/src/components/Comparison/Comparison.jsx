@@ -18,6 +18,7 @@ export default function Comparison() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [barChartData, setBarChartData] = useState([
+    false,
     [0, 0, 0],
     [0, 0, 0],
     "Unit",
@@ -29,11 +30,11 @@ export default function Comparison() {
     commonKeysArr = commonKeys(obj1, obj2);
 
     // for bar chart
+    // console.log('reached here..');
     if (commonKeysArr.includes("Performance")) {
       const innerObj1 = state[0]["Performance"];
       const innerObj2 = state[1]["Performance"];
-
-      console.log([innerObj1, innerObj2]);
+      // console.log([innerObj1, innerObj2]);
 
       const barChartArr1 = [
         // innerObj1["Cache"].match(/\d+(\.\d+)?/)[0],
@@ -54,9 +55,9 @@ export default function Comparison() {
         /^(\d+(\.\d+)?)\s*(\w+)$/
       )[3];
 
-      setBarChartData([barChartArr1, barChartArr2, unit]);
+      setBarChartData([true, barChartArr1, barChartArr2, unit]);
     }
-  }, []);
+  }, [state]);
 
   if (!state || state.length !== 2) {
     navigate("/");
@@ -106,18 +107,22 @@ export default function Comparison() {
           display: "flex",
         }}
       >
-        <Grid item mt={3} md={6} xs={12}>
-          <BarChart
-            // width={570}
-            height={600}
-            series={[
-              { data: barChartData[0], label: "Product 1", id: "aId" },
-              { data: barChartData[1], label: "Product 2", id: "bId" },
-            ]}
-            xAxis={[{ data: labels, scaleType: "band" }]}
-            yAxis={[{ label: barChartData[2] }]}
-          />
-        </Grid>
+        {barChartData[0] ? (
+          <Grid item mt={3} md={6} xs={12}>
+            <BarChart
+              // width={570}
+              height={600}
+              series={[
+                { data: barChartData[1], label: "Product 1", id: "aId" },
+                { data: barChartData[2], label: "Product 2", id: "bId" },
+              ]}
+              xAxis={[{ data: labels, scaleType: "band" }]}
+              yAxis={[{ label: barChartData[3] }]}
+            />
+          </Grid>
+        ) : (
+          <></>
+        )}
         <Grid item md={6} xs={12}>
           {commonKeysArr.map((key, idx) => {
             if (key === "name") return;

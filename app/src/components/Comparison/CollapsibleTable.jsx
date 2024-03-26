@@ -9,7 +9,7 @@ export default function CollapsibleTable({
   specificState,
   commonKeysArr,
 }) {
-  const [open, setOpen] = useState(headerName === "Essentials" ? true : false);
+  const [open, setOpen] = useState(true);
 
   return (
     <>

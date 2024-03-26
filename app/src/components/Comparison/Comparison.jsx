@@ -8,7 +8,7 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SquareIcon from "@mui/icons-material/Square";
 
 let commonKeysArr = [];
-const labels = ["# of Cores", "Processor Base Frequency", "Cache"];
+const labels = ["# of Cores", "Processor Base Frequency", "Cache", "Bus Speed"];
 
 export default function Comparison() {
   const navigate = useNavigate();

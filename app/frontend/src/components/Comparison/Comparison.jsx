@@ -11,7 +11,7 @@ import { useTheme } from "@mui/material/styles";
 let commonKeysArr = [];
 const labels = ["# of Cores", "Processor Base Frequency", "Cache", "Bus Speed"];
 
-export default function Comparison() {
+export default function Comparison({ open }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -63,14 +63,17 @@ export default function Comparison() {
       <Typography
         variant="h6"
         sx={{
-          marginLeft: { xs: "3.2rem", md: "12.7rem" },
+          marginLeft: open
+            ? { xs: "12.5rem", md: "200px" }
+            : { xs: "50px", md: "50px" },
           marginTop: "5rem",
           marginBottom: "1rem",
           fontSize: "2rem",
           color: "#0067B4",
           display: "flex",
           alignItems: "center",
-          transition: theme.transitions.create("margin-left", { // TODO: club this together in a styles object
+          transition: theme.transitions.create("margin-left", {
+            // TODO: club this together in a styles object
             easing: theme.transitions.easing.easeOut,
             duration: 300,
           }),
@@ -81,7 +84,9 @@ export default function Comparison() {
       </Typography>
       <Typography
         sx={{
-          marginLeft: { xs: "3.5rem", md: "13rem" },
+          marginLeft: open
+            ? { xs: "12.5rem", md: "200px" }
+            : { xs: "50px", md: "50px" },
           marginTop: "1rem",
           marginBottom: "0.5rem",
           fontSize: "1.1rem",
@@ -104,10 +109,12 @@ export default function Comparison() {
         width="100vw"
         // justifyContent="space-between"
         sx={{
-          paddingLeft: { xs: "3.7rem", md: "13.2rem" },
+          paddingLeft: open
+            ? { xs: "12.5rem", md: "200px" }
+            : { xs: "50px", md: "50px" },
           paddingRight: "1.5rem",
           display: "flex",
-          transition: theme.transitions.create("margin-left", {
+          transition: theme.transitions.create("padding-left", {
             easing: theme.transitions.easing.easeOut,
             duration: 300,
           }),

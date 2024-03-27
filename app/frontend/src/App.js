@@ -27,6 +27,7 @@ const styles = (theme) => ({
 // let categoryCount = 0;
 export default function App() {
   const theme = useTheme();
+  const [open, setOpen] = useState(false);
   const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
@@ -64,13 +65,21 @@ export default function App() {
       <ScrollToTop />
       <div>
         <Navbar />
-        <Sidebar />
+        <Sidebar
+          open={open}
+          handleOnChevronClick={() => {
+            setOpen(!open);
+          }}
+        />
         <main style={styles(theme).content}>
           <Routes>
-            <Route path="/" element={<Table jsonData={jsonData} />}></Route>
+            <Route
+              path="/"
+              element={<Table jsonData={jsonData} open={open} />}
+            ></Route>
           </Routes>
           <Routes>
-            <Route path="/compare" element={<Comparison />}></Route>
+            <Route path="/compare" element={<Comparison open={open} />}></Route>
           </Routes>
         </main>
       </div>

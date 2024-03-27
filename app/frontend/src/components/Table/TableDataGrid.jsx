@@ -58,7 +58,7 @@ const columns = [
 
 let comparisonProductsArr = [];
 
-export default function Table({ jsonData }) {
+export default function Table({ jsonData, open }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [checkboxSelection, setCheckboxSelection] = useState(false);
@@ -92,7 +92,9 @@ export default function Table({ jsonData }) {
         variant="h6"
         noWrap
         sx={{
-          marginLeft: { xs: "3.2rem", md: "12.7rem" },
+          marginLeft: open
+            ? { xs: "12.5rem", md: "200px" }
+            : { xs: "50px", md: "50px" },
           marginTop: "5rem",
           marginBottom: "1rem",
           fontSize: "2rem",
@@ -110,7 +112,9 @@ export default function Table({ jsonData }) {
       <Box
         sx={{
           mb: 1,
-          marginLeft: { xs: "3.5rem", md: "13rem" },
+          marginLeft: open
+            ? { xs: "12.7rem", md: "205px" }
+            : { xs: "55px", md: "55px" },
           transition: theme.transitions.create("margin-left", {
             easing: theme.transitions.easing.easeOut,
             duration: 300,
@@ -136,7 +140,9 @@ export default function Table({ jsonData }) {
         rowHeight={50}
         sx={{
           // TODO: change this slightly
-          marginLeft: { xs: "50px", md: "200px" },
+          marginLeft: open
+            ? { xs: "12.5rem", md: "200px" }
+            : { xs: "50px", md: "50px" },
           minHeight: "10rem",
           transition: theme.transitions.create("margin-left", {
             easing: theme.transitions.easing.easeOut,

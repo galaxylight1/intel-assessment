@@ -52,6 +52,14 @@ const styles = (theme) => ({
       paddingLeft: "0.8rem",
     },
   },
+  listItemBtn: {
+    "&.Mui-selected": {
+      "&:hover": {
+        backgroundColor: "#D3D2D2",
+      },
+      backgroundColor: "#D3D2D2",
+    },
+  },
   listItemTypo: {
     sx: {
       fontSize: "0.76rem",
@@ -103,10 +111,14 @@ export default function Sidebar({ open, handleOnChevronClick, matches }) {
       )}
       <List sx={{ marginTop: "1rem" }}>
         {[
-          { txt: "All Products", icon: <ShoppingCartIcon /> },
-          { txt: "Recently Announced", icon: <WhatshotIcon /> },
-          { txt: "Desktop Segment", icon: <MonitorIcon /> },
-          { txt: "Mobile Segment", icon: <PhoneIphoneIcon /> },
+          { txt: "All Products", icon: <ShoppingCartIcon />, selected: true },
+          {
+            txt: "Recently Announced",
+            icon: <WhatshotIcon />,
+            selected: false,
+          },
+          { txt: "Desktop Segment", icon: <MonitorIcon />, selected: false },
+          { txt: "Mobile Segment", icon: <PhoneIphoneIcon />, selected: false },
         ].map((item, index) => (
           <ListItem
             key={item}
@@ -115,7 +127,10 @@ export default function Sidebar({ open, handleOnChevronClick, matches }) {
             // divider
             sx={styles(theme).listItem}
           >
-            <ListItemButton>
+            <ListItemButton
+              selected={item.selected}
+              sx={styles(theme).listItemBtn}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
                 primary={item.txt}

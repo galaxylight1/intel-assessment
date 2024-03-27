@@ -8,6 +8,7 @@ import Slide from "@mui/material/Slide";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import MemoryIcon from "@mui/icons-material/Memory";
+import { useTheme } from "@mui/material/styles";
 
 const columns = [
   {
@@ -58,6 +59,7 @@ const columns = [
 let comparisonProductsArr = [];
 
 export default function Table({ jsonData }) {
+  const theme = useTheme();
   const navigate = useNavigate();
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
@@ -97,11 +99,24 @@ export default function Table({ jsonData }) {
           color: "#0067B4",
           display: "flex",
           alignItems: "center",
+          transition: theme.transitions.create("margin-left", {
+            easing: theme.transitions.easing.easeOut,
+            duration: 300,
+          }),
         }}
       >
         <MemoryIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> All Processors
       </Typography>
-      <Box sx={{ mb: 1, marginLeft: { xs: "3.5rem", md: "13rem" } }}>
+      <Box
+        sx={{
+          mb: 1,
+          marginLeft: { xs: "3.5rem", md: "13rem" },
+          transition: theme.transitions.create("margin-left", {
+            easing: theme.transitions.easing.easeOut,
+            duration: 300,
+          }),
+        }}
+      >
         <FormControlLabel
           label="Select two products for comparison"
           control={
@@ -113,6 +128,7 @@ export default function Table({ jsonData }) {
         />
       </Box>
       <DataGrid
+        className="table-data-grid"
         getRowId={(row) => row.id}
         rows={rows()}
         columns={columns}
@@ -122,6 +138,10 @@ export default function Table({ jsonData }) {
           // TODO: change this slightly
           marginLeft: { xs: "50px", md: "200px" },
           minHeight: "10rem",
+          transition: theme.transitions.create("margin-left", {
+            easing: theme.transitions.easing.easeOut,
+            duration: 300,
+          }),
         }}
         autoHeight
         initialState={{

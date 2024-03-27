@@ -5,23 +5,28 @@ import Table from "./components/Table/TableDataGrid";
 import Comparison from "./components/Comparison/Comparison";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/scrollToTop";
+import { useTheme } from "@mui/material/styles";
 
 const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
 
-const styles = {
+const styles = (theme) => ({
   content: {
-    // marginLeft: "1rem",
     paddingLeft: "0.5rem",
     paddingRight: "0.3rem",
-    // marginTop: "4.5rem",
-    // marginBottom: "1rem",
+    // ".table-data-grid": {
+    //   transition: theme.transitions.create("margin-left", {
+    //     easing: theme.transitions.easing.easeOut,
+    //     duration: 2000,
+    //   }),
+    // },
   },
-};
+});
 
 // TODO: remove this when not needed
 // let intialCategory = "Legacy Intel Xeon Processors";
 // let categoryCount = 0;
 export default function App() {
+  const theme = useTheme();
   const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
@@ -60,7 +65,7 @@ export default function App() {
       <div>
         <Navbar />
         <Sidebar />
-        <main style={styles.content}>
+        <main style={styles(theme).content}>
           <Routes>
             <Route path="/" element={<Table jsonData={jsonData} />}></Route>
           </Routes>

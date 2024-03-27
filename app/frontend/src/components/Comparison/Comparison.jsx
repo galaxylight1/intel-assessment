@@ -6,11 +6,13 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SquareIcon from "@mui/icons-material/Square";
+import { useTheme } from "@mui/material/styles";
 
 let commonKeysArr = [];
 const labels = ["# of Cores", "Processor Base Frequency", "Cache", "Bus Speed"];
 
 export default function Comparison() {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { state } = useLocation();
   if (!state || state.length !== 2) {
@@ -68,6 +70,10 @@ export default function Comparison() {
           color: "#0067B4",
           display: "flex",
           alignItems: "center",
+          transition: theme.transitions.create("margin-left", { // TODO: club this together in a styles object
+            easing: theme.transitions.easing.easeOut,
+            duration: 300,
+          }),
         }}
       >
         <BarChartIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> Compare
@@ -82,6 +88,10 @@ export default function Comparison() {
           color: "#0067B4",
           display: "flex",
           alignItems: "center",
+          transition: theme.transitions.create("margin-left", {
+            easing: theme.transitions.easing.easeOut,
+            duration: 300,
+          }),
         }}
       >
         <SquareIcon sx={{ color: "#05B1AF", mr: "0.5rem" }} />
@@ -97,6 +107,10 @@ export default function Comparison() {
           paddingLeft: { xs: "3.7rem", md: "13.2rem" },
           paddingRight: "1.5rem",
           display: "flex",
+          transition: theme.transitions.create("margin-left", {
+            easing: theme.transitions.easing.easeOut,
+            duration: 300,
+          }),
         }}
       >
         <Grid item mt={3} md={6} xs={12}>

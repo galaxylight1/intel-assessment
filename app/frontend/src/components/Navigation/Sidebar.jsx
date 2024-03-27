@@ -11,8 +11,9 @@ import {
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-// import { useState } from "react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import MonitorIcon from "@mui/icons-material/Monitor";
 const drawerWidth = { xs: 50, md: 200 };
 
 const styles = (theme) => ({
@@ -102,24 +103,22 @@ export default function Sidebar({ open, handleOnChevronClick, matches }) {
       )}
       <List sx={{ marginTop: "1rem" }}>
         {[
-          "All Products",
-          "Recently Announced",
-          "Desktop Segment",
-          "Mobile Segment",
-        ].map((text, index) => (
+          { txt: "All Products", icon: <ShoppingCartIcon /> },
+          { txt: "Recently Announced", icon: <WhatshotIcon /> },
+          { txt: "Desktop Segment", icon: <MonitorIcon /> },
+          { txt: "Mobile Segment", icon: <PhoneIphoneIcon /> },
+        ].map((item, index) => (
           <ListItem
-            key={text}
+            key={item}
             disableGutters
             alignItems="center"
             // divider
             sx={styles(theme).listItem}
           >
             <ListItemButton>
-              <ListItemIcon>
-                <WhatshotIcon />
-              </ListItemIcon>
+              <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
-                primary={text}
+                primary={item.txt}
                 primaryTypographyProps={styles(theme).listItemTypo}
               />
             </ListItemButton>

@@ -25,12 +25,14 @@ export default function App() {
   const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
-    fetch("/API_DATA.json")
-      .then((response) => response.json())
+    fetch("http://localhost:8080/")
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
         data = Object.values(data);
         data = data.filter((item) => {
-          if (item.name || item.Essentials["Status"]) return true;
+          if (item.name && item.Essentials["Status"]) return true;
         });
         setJsonData(data);
       })

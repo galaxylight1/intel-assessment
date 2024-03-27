@@ -6,6 +6,7 @@ import Comparison from "./components/Comparison/Comparison";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/scrollToTop";
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
 
@@ -28,6 +29,7 @@ const styles = (theme) => ({
 export default function App() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const matches = useMediaQuery("(min-width:900px)");
   const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
@@ -70,16 +72,22 @@ export default function App() {
           handleOnChevronClick={() => {
             setOpen(!open);
           }}
+          matches={matches}
         />
         <main style={styles(theme).content}>
           <Routes>
             <Route
               path="/"
-              element={<Table jsonData={jsonData} open={open} />}
+              element={
+                <Table jsonData={jsonData} open={open} matches={matches} />
+              }
             ></Route>
           </Routes>
           <Routes>
-            <Route path="/compare" element={<Comparison open={open} />}></Route>
+            <Route
+              path="/compare"
+              element={<Comparison open={open} matches={matches} />}
+            ></Route>
           </Routes>
         </main>
       </div>

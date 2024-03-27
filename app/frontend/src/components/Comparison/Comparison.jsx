@@ -11,7 +11,7 @@ import { useTheme } from "@mui/material/styles";
 let commonKeysArr = [];
 const labels = ["# of Cores", "Processor Base Frequency", "Cache", "Bus Speed"];
 
-export default function Comparison({ open }) {
+export default function Comparison({ open, matches }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -63,8 +63,10 @@ export default function Comparison({ open }) {
       <Typography
         variant="h6"
         sx={{
-          marginLeft: open
-            ? { xs: "12.5rem", md: "200px" }
+          marginLeft: matches
+            ? open
+              ? { xs: "12.5rem", md: "200px" }
+              : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           marginTop: "5rem",
           marginBottom: "1rem",
@@ -84,8 +86,10 @@ export default function Comparison({ open }) {
       </Typography>
       <Typography
         sx={{
-          marginLeft: open
-            ? { xs: "12.5rem", md: "200px" }
+          marginLeft: matches
+            ? open
+              ? { xs: "12.5rem", md: "200px" }
+              : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           marginTop: "1rem",
           marginBottom: "0.5rem",
@@ -109,8 +113,10 @@ export default function Comparison({ open }) {
         width="100vw"
         // justifyContent="space-between"
         sx={{
-          paddingLeft: open
-            ? { xs: "12.5rem", md: "200px" }
+          paddingLeft: matches
+            ? open
+              ? { xs: "12.5rem", md: "200px" }
+              : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           paddingRight: "1.5rem",
           display: "flex",

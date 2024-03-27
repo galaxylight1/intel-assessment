@@ -58,9 +58,10 @@ const columns = [
 
 let comparisonProductsArr = [];
 
-export default function Table({ jsonData, open }) {
+export default function Table({ jsonData, open, matches }) {
   const theme = useTheme();
   const navigate = useNavigate();
+
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
   const [isSnackbarVisible, setIsSnackBarVisible] = useState(false);
@@ -92,8 +93,10 @@ export default function Table({ jsonData, open }) {
         variant="h6"
         noWrap
         sx={{
-          marginLeft: open
-            ? { xs: "12.5rem", md: "200px" }
+          marginLeft: matches
+            ? open
+              ? { xs: "12.5rem", md: "200px" }
+              : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           marginTop: "5rem",
           marginBottom: "1rem",
@@ -112,8 +115,10 @@ export default function Table({ jsonData, open }) {
       <Box
         sx={{
           mb: 1,
-          marginLeft: open
-            ? { xs: "12.7rem", md: "205px" }
+          marginLeft: matches
+            ? open
+              ? { xs: "12.7rem", md: "205px" }
+              : { xs: "55px", md: "55px" }
             : { xs: "55px", md: "55px" },
           transition: theme.transitions.create("margin-left", {
             easing: theme.transitions.easing.easeOut,
@@ -140,8 +145,10 @@ export default function Table({ jsonData, open }) {
         rowHeight={50}
         sx={{
           // TODO: change this slightly
-          marginLeft: open
-            ? { xs: "12.5rem", md: "200px" }
+          marginLeft: matches
+            ? open
+              ? { xs: "12.5rem", md: "200px" }
+              : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           minHeight: "10rem",
           transition: theme.transitions.create("margin-left", {

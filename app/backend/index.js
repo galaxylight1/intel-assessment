@@ -1,8 +1,10 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import { MongoClient } from "mongodb";
 
-const app = express();
+const filter = {};
 
-mongoose.connect("mongodb://127.0.0.1:27017/intel");
-
-app.listen(8080, () => console.log("backend is running"));
+const client = await MongoClient.connect("mongodb://localhost:27017/intel");
+const coll = client.db("intel").collection("processors");
+const cursor = coll.find(filter);
+const result = await cursor.toArray();
+console.log(result);
+await client.close();

@@ -180,7 +180,7 @@ export default function Table({ jsonData, open }) {
         TransitionComponent={Slide}
         onClick={handleOnSnackbarClick}
         key="compareProducts"
-        autoHideDuration={1200}
+        // autoHideDuration={1200}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <SnackbarContent

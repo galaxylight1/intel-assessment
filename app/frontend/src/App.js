@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/scrollToTop";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Provider } from "./context/FilterContext";
 
 const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
 
@@ -29,6 +30,9 @@ const styles = (theme) => ({
 export default function App() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [customFilterModel, setCustomFilterModel] = useState({
+    items: [],
+  });
   const matches = useMediaQuery("(min-width:900px)");
   const [jsonData, setJsonData] = useState([]);
 
@@ -67,19 +71,27 @@ export default function App() {
       <ScrollToTop />
       <div>
         <Navbar />
+        {/* <Provider> */}
         <Sidebar
           open={open}
           handleOnChevronClick={() => {
             setOpen(!open);
           }}
           matches={matches}
+          handleSetCustomFilterModel={setCustomFilterModel}
         />
         <main style={styles(theme).content}>
           <Routes>
             <Route
               path="/"
               element={
-                <Table jsonData={jsonData} open={open} matches={matches} />
+                <Table
+                  jsonData={jsonData}
+                  open={open}
+                  matches={matches}
+                  customFilterModel={customFilterModel}
+                  handleSetCustomFilterModel={setCustomFilterModel}
+                />
               }
             ></Route>
           </Routes>
@@ -90,6 +102,7 @@ export default function App() {
             ></Route>
           </Routes>
         </main>
+        {/* </Provider> */}
       </div>
     </BrowserRouter>
   );

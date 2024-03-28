@@ -14,6 +14,8 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import MonitorIcon from "@mui/icons-material/Monitor";
+import { useContext } from "react";
+import FilterContext from "../../context/FilterContext";
 const drawerWidth = { xs: 50, md: 200 };
 
 const styles = (theme) => ({
@@ -70,12 +72,32 @@ const styles = (theme) => ({
   },
 });
 
-export default function Sidebar({ open, handleOnChevronClick, matches }) {
+export default function Sidebar({
+  open,
+  handleOnChevronClick,
+  matches,
+  handleSetCustomFilterModel,
+}) {
   const theme = useTheme();
+  // const { setCustomFilterModel } = useContext(FilterContext);
 
   // const handleOnChevronClick = () => {
   //   setOpen(!open);
   // };
+
+  const handleOnListBtnClick = (txt) => {
+    if (txt === "Recently Announced") {
+      handleSetCustomFilterModel({
+        items: [
+          {
+            field: "status",
+            operator: "equals",
+            value: "Announced",
+          },
+        ],
+      });
+    }
+  };
 
   return (
     <Drawer
@@ -121,7 +143,7 @@ export default function Sidebar({ open, handleOnChevronClick, matches }) {
           { txt: "Mobile Segment", icon: <PhoneIphoneIcon />, selected: false },
         ].map((item, index) => (
           <ListItem
-            key={item}
+            key={index}
             disableGutters
             alignItems="center"
             // divider
@@ -130,6 +152,9 @@ export default function Sidebar({ open, handleOnChevronClick, matches }) {
             <ListItemButton
               selected={item.selected}
               sx={styles(theme).listItemBtn}
+              onClick={() => {
+                handleOnListBtnClick(item.txt);
+              }}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, FormControlLabel, Switch } from "@mui/material";
 import customToolbar from "./CustomToolbar";
@@ -9,6 +9,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import MemoryIcon from "@mui/icons-material/Memory";
 import { useTheme } from "@mui/material/styles";
+import FilterContext from "../../context/FilterContext";
 
 const columns = [
   {
@@ -58,9 +59,16 @@ const columns = [
 
 let comparisonProductsArr = [];
 
-export default function Table({ jsonData, open, matches }) {
+export default function Table({
+  jsonData,
+  open,
+  matches,
+  customFilterModel,
+  handleSetCustomFilterModel,
+}) {
   const theme = useTheme();
   const navigate = useNavigate();
+  // const { customFilterModel } = useContext(FilterContext);
 
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
@@ -161,7 +169,12 @@ export default function Table({ jsonData, open, matches }) {
           sorting: {
             sortModel: [{ field: "id", sort: "asc" }],
           },
+          // filter: customFilterModel,
         }}
+        filterModel={customFilterModel}
+        onFilterModelChange={(newFilterModel) =>
+          handleSetCustomFilterModel(newFilterModel)
+        }
         checkboxSelection={checkboxSelection}
         rowSelectionModel={rowSelectionModel}
         onRowSelectionModelChange={(newRowSelectionModel) => {

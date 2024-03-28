@@ -47,6 +47,14 @@ const columns = [
     },
   },
   {
+    field: "processorBaseFreq",
+    headerName: "Processor Base Frequency",
+    minWidth: 150,
+    renderCell: (cellValues) => {
+      return cellValues.row.processorBaseFreq;
+    },
+  },
+  {
     field: "status",
     headerName: "Product Status",
     minWidth: 150,
@@ -97,6 +105,11 @@ export default function Table({
     cores: item.Performance ? parseInt(item.Performance["# of Cores"]) : 0,
     segment: item.Essentials["Vertical Segment"]
       ? item.Essentials["Vertical Segment"]
+      : "-",
+    processorBaseFreq: item.Performance
+      ? item.Performance["Processor Base Frequency"]
+        ? item.Performance["Processor Base Frequency"]
+        : "-"
       : "-",
   }));
 

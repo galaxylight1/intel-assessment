@@ -81,6 +81,17 @@ export default function Sidebar({
           ],
         };
         break;
+      case "Server Segment":
+        obj = {
+          items: [
+            {
+              field: "segment",
+              operator: "equals",
+              value: "Server",
+            },
+          ],
+        };
+        break;
       default:
         obj = { items: [] };
     }

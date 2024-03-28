@@ -9,7 +9,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
 import MemoryIcon from "@mui/icons-material/Memory";
 import { useTheme } from "@mui/material/styles";
-import FilterContext from "../../context/FilterContext";
 
 const columns = [
   {
@@ -55,6 +54,14 @@ const columns = [
       return cellValues.row.status;
     },
   },
+  {
+    field: "segment",
+    headerName: "Vertical Segment",
+    minWidth: 150,
+    renderCell: (cellValues) => {
+      return cellValues.row.segment;
+    },
+  },
 ];
 
 let comparisonProductsArr = [];
@@ -68,7 +75,6 @@ export default function Table({
 }) {
   const theme = useTheme();
   const navigate = useNavigate();
-  // const { customFilterModel } = useContext(FilterContext);
 
   const [checkboxSelection, setCheckboxSelection] = useState(false);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
@@ -84,9 +90,14 @@ export default function Table({
   const newJsonData = jsonData.map((item, idx) => ({
     id: idx, // TODO: id: 27076 + idx,
     name: item.name,
-    productCollection: item.Essentials["Product Collection"],
-    status: item.Essentials.Status,
+    productCollection: item.Essentials["Product Collection"]
+      ? item.Essentials["Product Collection"]
+      : "-",
+    status: item.Essentials.Status ? item.Essentials.Status : "-",
     cores: item.Performance ? parseInt(item.Performance["# of Cores"]) : 0,
+    segment: item.Essentials["Vertical Segment"]
+      ? item.Essentials["Vertical Segment"]
+      : "-",
   }));
 
   const handleRowSelectionModel = (newRowSelectionModel) => {
@@ -169,7 +180,6 @@ export default function Table({
           sorting: {
             sortModel: [{ field: "id", sort: "asc" }],
           },
-          // filter: customFilterModel,
         }}
         filterModel={customFilterModel}
         onFilterModelChange={(newFilterModel) =>
@@ -200,7 +210,6 @@ export default function Table({
         TransitionComponent={Slide}
         onClick={handleOnSnackbarClick}
         key="compareProducts"
-        // autoHideDuration={1200}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <SnackbarContent

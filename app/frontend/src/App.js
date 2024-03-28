@@ -7,20 +7,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/scrollToTop";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Provider } from "./context/FilterContext";
 
-const drawerWidth = { xs: 50, md: 200 }; // TODO: change this
+const drawerWidth = { xs: 50, md: 200 }; // TODO: change or remove this
 
 const styles = (theme) => ({
   content: {
     paddingLeft: "0.5rem",
     paddingRight: "0.3rem",
-    // ".table-data-grid": {
-    //   transition: theme.transitions.create("margin-left", {
-    //     easing: theme.transitions.easing.easeOut,
-    //     duration: 2000,
-    //   }),
-    // },
   },
 });
 
@@ -71,7 +64,6 @@ export default function App() {
       <ScrollToTop />
       <div>
         <Navbar />
-        {/* <Provider> */}
         <Sidebar
           open={open}
           handleOnChevronClick={() => {
@@ -102,7 +94,6 @@ export default function App() {
             ></Route>
           </Routes>
         </main>
-        {/* </Provider> */}
       </div>
     </BrowserRouter>
   );

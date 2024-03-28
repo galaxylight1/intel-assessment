@@ -15,9 +15,7 @@ export default function CollapsibleTable({
     <>
       <Box
         sx={{
-          // marginLeft: { xs: "3.7rem", md: "13.2rem" },
           marginTop: "2rem",
-          // maxWidth: "33rem",
         }}
       >
         <Box
@@ -57,8 +55,8 @@ export default function CollapsibleTable({
                         "&:nth-of-type(odd)": {
                           backgroundColor: "#F5F5F5",
                         },
-                        // hide last border
                         "&:last-child td, &:last-child th": {
+                          // hide last border
                           border: 0,
                         },
                       }}

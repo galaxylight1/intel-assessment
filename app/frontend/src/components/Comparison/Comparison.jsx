@@ -34,14 +34,11 @@ export default function Comparison({ open, matches }) {
 
     labels.map((label) => {
       if (!innerObj1[label] || !innerObj2[label]) return; // if the value doesn't exist in any of the objects (obj1 and obj2) then we can skip it because comparison is not possible
-      // barChartData = {}; // reset
 
-      // console.log(key);
       let split1 = innerObj1[label].split(" ");
       let split2 = innerObj2[label].split(" ");
       let barChartArr1 = [split1 ? split1[0] : innerObj1[label]];
       let barChartArr2 = [split2 ? split2[0] : innerObj2[label]];
-      // console.log(barChartArr1, barChartArr2);
 
       const unit1 = split1 ? split1[1] : "";
       const unit2 = split2 ? split2[1] : "";
@@ -111,7 +108,6 @@ export default function Comparison({ open, matches }) {
       <Grid
         container
         width="100vw"
-        // justifyContent="space-between"
         sx={{
           paddingLeft: matches
             ? open
@@ -136,12 +132,10 @@ export default function Comparison({ open, matches }) {
                   series={[
                     {
                       data: barChartData.aData,
-                      // label: state[0].name,
                       id: "aId",
                     },
                     {
                       data: barChartData.bData,
-                      // label: state[1].name,
                       id: "bId",
                     },
                   ]}

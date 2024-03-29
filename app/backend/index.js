@@ -4,8 +4,10 @@ import cors from "cors";
 
 const filter = {};
 
-const client = await MongoClient.connect("mongodb://localhost:27017/intel");
-const collection = client.db("intel").collection("processors_new");
+const client = await MongoClient.connect(
+  "mongodb+srv://prateeksingh99:testing123@intelassessment.islgzxo.mongodb.net/"
+);
+const collection = client.db("intel").collection("processors");
 
 const app = express();
 app.use(cors());

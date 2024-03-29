@@ -2,11 +2,11 @@ import { MongoClient } from "mongodb";
 import express from "express";
 import cors from "cors";
 
+const mongoConnString = process.env.MONGODB_CONNECT_URI;
+
 const filter = {};
 
-const client = await MongoClient.connect(
-  "mongodb+srv://prateeksingh99:testing123@intelassessment.islgzxo.mongodb.net/"
-);
+const client = await MongoClient.connect(mongoConnString);
 const collection = client.db("intel").collection("processors");
 
 const app = express();
@@ -38,4 +38,6 @@ app.get("/totalCount", async (req, res) => {
   res.json({ totalCount: result });
 });
 
-app.listen(8080, () => console.info("backend running on port 8080"));
+app.listen(process.env.PORT, () =>
+  console.info("backend running on port 8080")
+);

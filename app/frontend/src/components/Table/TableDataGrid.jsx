@@ -129,7 +129,7 @@ export default function Table({
   // const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/", {
+    fetch("https://intel-assessment-backend.vercel.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +156,7 @@ export default function Table({
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/totalCount")
+    fetch("https://intel-assessment-backend.vercel.app/totalCount")
       .then((response) => {
         return response.json();
       })
@@ -184,7 +184,7 @@ export default function Table({
 
     if (startIdx < 0) startIdx = 0;
 
-    fetch("http://localhost:8080/", {
+    fetch("https://intel-assessment-backend.vercel.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -64,7 +64,7 @@ export default function SideList({ handleOnListBtnClick }) {
   };
 
   return (
-    <List sx={{ marginTop: "1rem" }}>
+    <List sx={{ marginTop: "0.4rem" }}>
       {listArr.map((item, index) => (
         <ListItem
           key={index}

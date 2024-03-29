@@ -11,21 +11,27 @@ import { useTheme } from "@mui/material/styles";
 
 const data = [
   {
-    id: "java",
-    label: "java",
-    value: 0.33,
+    id: "desktop",
+    label: "Desktop",
+    value: 0.66,
     color: "hsl(242, 70%, 50%)",
   },
   {
-    id: "sass",
-    label: "sass",
+    id: "mobile",
+    label: "Mobile",
     value: 0.335,
     color: "hsl(237, 70%, 50%)",
   },
   {
-    id: "javascript",
-    label: "javascript",
+    id: "server",
+    label: "Server",
     value: 0.345,
+    color: "hsl(348, 70%, 50%)",
+  },
+  {
+    id: "workstation",
+    label: "Workstation",
+    value: 0.20,
     color: "hsl(348, 70%, 50%)",
   },
 ];
@@ -56,7 +62,8 @@ const PieChart = ({ open, matches }) => {
           }),
         }}
       >
-        <PieChartIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> Pie Visualization
+        <PieChartIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> Pie
+        Visualization
       </Typography>
       <Box
         sx={{

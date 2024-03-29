@@ -8,6 +8,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/", (req, res) => {
+  res.send("Server is running!");
+});
 
 const client = await MongoClient.connect(process.env.MONGODB_CONNECT_URI);
 const collection = client.db("intel").collection("processors");
@@ -24,7 +27,7 @@ app.post("/", async (req, res) => {
   const endIdx = reqObj.to;
   const skipCount = startIdx;
 
-  // Calculate the number of documents to limit
+  // calculating the number of documents to limit
   const limitCount = endIdx - startIdx;
   const cursor = collection.find({}).skip(skipCount).limit(limitCount);
   const result = await cursor.toArray();

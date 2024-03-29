@@ -2,16 +2,15 @@ import { MongoClient } from "mongodb";
 import express from "express";
 import cors from "cors";
 
-const mongoConnString = process.env.MONGODB_CONNECT_URI;
-
 const filter = {};
 
-const client = await MongoClient.connect(mongoConnString);
-const collection = client.db("intel").collection("processors");
-
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+
+const client = await MongoClient.connect(process.env.MONGODB_CONNECT_URI);
+const collection = client.db("intel").collection("processors");
 
 app.get("/", async (req, res) => {
   const cursor = collection.find(filter);

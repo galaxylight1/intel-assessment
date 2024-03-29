@@ -27,22 +27,6 @@ export default function App() {
     items: [],
   });
   const matches = useMediaQuery("(min-width:900px)");
-  const [jsonData, setJsonData] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        data = Object.values(data);
-        data = data.filter((item) => {
-          if (item.name && item.Essentials["Status"]) return true;
-        });
-        setJsonData(data);
-      })
-      .catch((error) => console.error("Error fetching data: ", error));
-  }, []);
 
   // TODO: remove this when not needed
   // useEffect(() => {
@@ -55,7 +39,6 @@ export default function App() {
   //     // }
 
   //     if (item["Performance"] && item["Performance"]["Processor Base Frequency"])
-  //       console.log(item["Performance"]["Processor Base Frequency"]);
   //   });
   // }, [jsonData]);
 
@@ -78,7 +61,7 @@ export default function App() {
               path="/"
               element={
                 <Table
-                  jsonData={jsonData}
+                  // jsonData={jsonData}
                   open={open}
                   matches={matches}
                   customFilterModel={customFilterModel}

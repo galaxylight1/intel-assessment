@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, FormControlLabel, Switch } from "@mui/material";
+import { Box, FormControlLabel, LinearProgress, Switch } from "@mui/material";
 import customToolbar from "./CustomToolbar";
 import Snackbar from "@mui/material/Snackbar";
 import { SnackbarContent, Typography } from "@mui/material";
@@ -73,30 +73,14 @@ const columns = [
 ];
 
 let comparisonProductsArr = [];
+const pageSize = 100;
+let pageIdx = 0;
+let startIdx = 0;
+let newJsonData = [];
 
-export default function Table({
-  jsonData,
-  open,
-  matches,
-  customFilterModel,
-  handleSetCustomFilterModel,
-}) {
-  const theme = useTheme();
-  const navigate = useNavigate();
-
-  const [checkboxSelection, setCheckboxSelection] = useState(false);
-  const [rowSelectionModel, setRowSelectionModel] = useState([]);
-  const [isSnackbarVisible, setIsSnackBarVisible] = useState(false);
-
-  const handleOnSnackbarClick = () => {
-    const passOnProductsArr = [...comparisonProductsArr];
-    comparisonProductsArr = []; // reset
-    navigate(`/compare`, { state: passOnProductsArr });
-  };
-
-  // pre-processing, TODO: explore useEffect here
-  const newJsonData = jsonData.map((item, idx) => ({
-    id: idx, // TODO: id: 27076 + idx,
+function preProcessing(data, startIdx) {
+  const newData = data.map((item, idx) => ({
+    id: startIdx + idx, // TODO: id: 27076 + idx,
     name: item.name,
     productCollection: item.Essentials["Product Collection"]
       ? item.Essentials["Product Collection"]
@@ -112,12 +96,130 @@ export default function Table({
         : "-"
       : "-",
   }));
+  return newData;
+}
+
+export default function Table({
+  // jsonData,
+  open,
+  matches,
+  customFilterModel,
+  handleSetCustomFilterModel,
+}) {
+  const theme = useTheme();
+  const navigate = useNavigate();
+
+  const [checkboxSelection, setCheckboxSelection] = useState(false);
+  const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  const [isSnackbarVisible, setIsSnackBarVisible] = useState(false);
+  const [rows, setRows] = useState([]);
+  const [paginationModel, setPaginationModel] = useState({
+    page: pageIdx,
+    pageSize: pageSize,
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  // pre-processing, TODO: explore useEffect here
+  // useEffect(() => {
+  //   newJsonData = jsonData;
+  //   const tempJsonData = preProcessing(jsonData, startIdx);
+  //   setRows(tempJsonData);
+  // }, [jsonData]);
+
+  // const [jsonData, setJsonData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: startIdx,
+        to: startIdx + 100,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // data = Object.values(data).slice(0, 100);
+        data = data.filter((item) => {
+          if (item.name && item.Essentials["Status"]) return true;
+        });
+        newJsonData = data;
+        const tempJsonData = preProcessing(data, startIdx);
+        setIsLoading(false);
+        setRows(tempJsonData);
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/totalCount")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setRowCountState((prevRowCountState) =>
+          data?.totalCount !== undefined ? data?.totalCount : prevRowCountState
+        );
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
+  }, []);
+
+  const [rowCountState, setRowCountState] = useState(
+    // pageInfo?.totalRowCount || 0,
+    0
+  );
+
+  const handlePageChange = async (newPaginationModel) => {
+    setIsLoading(true);
+
+    // note: here startIdx will be either +100 or -100 depending on if we are moving to next page or moving to previous page
+    startIdx =
+      newPaginationModel.page > paginationModel.page
+        ? startIdx + 100
+        : startIdx - 100;
+
+    if (startIdx < 0) startIdx = 0;
+
+    fetch("http://localhost:8080/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: startIdx,
+        to: startIdx + 100,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        newJsonData = data;
+        const tempJsonData = preProcessing(data, startIdx);
+        setIsLoading(false);
+        setRows(tempJsonData);
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
+
+    pageIdx = newPaginationModel.page;
+    setPaginationModel(newPaginationModel);
+  };
+
+  const handleOnSnackbarClick = () => {
+    const passOnProductsArr = [...comparisonProductsArr];
+    comparisonProductsArr = []; // reset
+    navigate(`/compare`, { state: passOnProductsArr });
+  };
 
   const handleRowSelectionModel = (newRowSelectionModel) => {
     setRowSelectionModel(newRowSelectionModel);
   };
 
-  const rows = () => [...newJsonData];
+  // const rows = () => [...newJsonData];
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -171,7 +273,7 @@ export default function Table({
       <DataGrid
         className="table-data-grid"
         getRowId={(row) => row.id}
-        rows={rows()}
+        rows={rows}
         columns={columns}
         headerHeight={50}
         rowHeight={50}
@@ -205,18 +307,26 @@ export default function Table({
             return;
           }
           if (newRowSelectionModel.length === 2) {
-            comparisonProductsArr = [
-              jsonData[newRowSelectionModel[0]],
-              jsonData[newRowSelectionModel[1]],
-            ];
             setIsSnackBarVisible(true);
           }
-          if (newRowSelectionModel.length < 2) {
+          if (isSnackbarVisible && newRowSelectionModel.length < 2) {
+            comparisonProductsArr.pop();
             setIsSnackBarVisible(false);
+          } else {
+            comparisonProductsArr.push(
+              newJsonData[newRowSelectionModel.slice(-1) - startIdx]
+            );
           }
           handleRowSelectionModel(newRowSelectionModel);
         }}
-        slots={{ toolbar: customToolbar }}
+        slots={{ toolbar: customToolbar, loadingOverlay: LinearProgress }}
+        paginationMode="server"
+        paginationModel={paginationModel}
+        onPaginationModelChange={handlePageChange}
+        pageSizeOptions={[25, 50, 100]}
+        rowCount={rowCountState}
+        keepNonExistentRowsSelected
+        loading={isLoading}
       />
       <Snackbar
         open={isSnackbarVisible}

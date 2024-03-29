@@ -45,7 +45,6 @@ export default function Sidebar({
   const navigate = useNavigate();
 
   const handleOnListBtnClick = (txt) => {
-    console.log(txt);
     let obj = {};
     switch (txt) {
       case "Recently Announced":

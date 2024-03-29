@@ -3,6 +3,7 @@ import Navbar from "./components/Navigation/Navbar";
 import Sidebar from "./components/Navigation/Sidebar";
 import Table from "./components/Table/TableDataGrid";
 import Comparison from "./components/Comparison/Comparison";
+import PieChart from "./components/Pie Chart/PieChart";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./utils/scrollToTop";
 import { useTheme } from "@mui/material/styles";
@@ -54,6 +55,12 @@ export default function App() {
             <Route
               path="/compare"
               element={<Comparison open={open} matches={matches} />}
+            ></Route>
+          </Routes>
+          <Routes>
+            <Route
+              path="/graph"
+              element={<PieChart open={open} matches={matches} />}
             ></Route>
           </Routes>
         </main>

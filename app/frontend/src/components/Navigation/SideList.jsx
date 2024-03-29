@@ -2,7 +2,8 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import MonitorIcon from "@mui/icons-material/Monitor";
-import StorageIcon from '@mui/icons-material/Storage';
+import StorageIcon from "@mui/icons-material/Storage";
+import PieChartIcon from "@mui/icons-material/PieChart";
 import {
   List,
   ListItem,
@@ -49,6 +50,7 @@ export default function SideList({ handleOnListBtnClick }) {
     { txt: "Desktop Segment", icon: <MonitorIcon />, selected: false },
     { txt: "Mobile Segment", icon: <PhoneIphoneIcon />, selected: false },
     { txt: "Server Segment", icon: <StorageIcon />, selected: false },
+    { txt: "Pie Visualisation", icon: <PieChartIcon />, selected: false },
   ]);
 
   const setSelectedInListArr = (index) => {

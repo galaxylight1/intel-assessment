@@ -94,7 +94,11 @@ export default function Sidebar({
       default:
         obj = { items: [] };
     }
-    navigate("/");
+    if (txt === "Pie Visualisation") {
+      navigate("/graph");
+    } else {
+      navigate("/");
+    }
     handleSetCustomFilterModel(obj);
   };
 

@@ -57,7 +57,7 @@ const PieChart = ({ open, matches }) => {
         }}
       >
         <PieChartIcon sx={{ fontSize: "3rem", mr: "0.5rem" }} /> Pie Chart
-        Visualisation
+        Analysis
       </Typography>
       <Box
         sx={{

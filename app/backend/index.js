@@ -8,6 +8,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/", (req, res) => {
+  res.send("Server is running!");
+});
 
 const client = await MongoClient.connect(process.env.MONGODB_CONNECT_URI);
 const collection = client.db("intel").collection("processors");

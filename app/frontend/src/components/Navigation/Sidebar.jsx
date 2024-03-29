@@ -94,7 +94,7 @@ export default function Sidebar({
       default:
         obj = { items: [] };
     }
-    if (txt === "Pie Visualisation") {
+    if (txt === "Pie Visualization") {
       navigate("/graph");
     } else {
       navigate("/");

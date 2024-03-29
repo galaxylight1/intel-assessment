@@ -50,7 +50,7 @@ export default function SideList({ handleOnListBtnClick }) {
     { txt: "Desktop Segment", icon: <MonitorIcon />, selected: false },
     { txt: "Mobile Segment", icon: <PhoneIphoneIcon />, selected: false },
     { txt: "Server Segment", icon: <StorageIcon />, selected: false },
-    { txt: "Pie Visualisation", icon: <PieChartIcon />, selected: false },
+    { txt: "Pie Visualization", icon: <PieChartIcon />, selected: false },
   ]);
 
   const setSelectedInListArr = (index) => {

@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import PieChartIcon from "@mui/icons-material/PieChart";
 import { ResponsivePie } from "@nivo/pie";
 import { useTheme } from "@mui/material/styles";
+import { useState, useEffect } from "react";
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -9,35 +10,54 @@ import { useTheme } from "@mui/material/styles";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
-const data = [
-  {
-    id: "desktop",
-    label: "Desktop",
-    value: 0.66,
-    color: "hsl(242, 70%, 50%)",
-  },
-  {
-    id: "mobile",
-    label: "Mobile",
-    value: 0.335,
-    color: "hsl(237, 70%, 50%)",
-  },
-  {
-    id: "server",
-    label: "Server",
-    value: 0.345,
-    color: "hsl(348, 70%, 50%)",
-  },
-  {
-    id: "workstation",
-    label: "Workstation",
-    value: 0.20,
-    color: "hsl(348, 70%, 50%)",
-  },
-];
-
 const PieChart = ({ open, matches }) => {
   const theme = useTheme();
+  const [pieData, setPieData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/pie")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const total = data.totalCount;
+        const percent1 = data.desktopCount / total;
+        const percent2 = data.serverCount / total;
+        const percent3 = data.mobileCount / total;
+        const percent4 = data.workstationCount / total;
+
+        const tempPieData = [
+          {
+            id: "desktop",
+            label: "Desktop",
+            value: percent1,
+            color: "hsl(242, 70%, 50%)",
+          },
+
+          {
+            id: "server",
+            label: "Server",
+            value: percent2,
+            color: "hsl(348, 70%, 50%)",
+          },
+          {
+            id: "mobile",
+            label: "Mobile",
+            value: percent3,
+            color: "hsl(237, 70%, 50%)",
+          },
+          {
+            id: "workstation",
+            label: "Workstation",
+            value: percent4,
+            color: "hsl(348, 70%, 50%)",
+          },
+        ];
+
+        setPieData(tempPieData);
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
+  }, []);
 
   return (
     <>
@@ -82,10 +102,11 @@ const PieChart = ({ open, matches }) => {
         }}
       >
         <ResponsivePie
-          data={data}
+          data={pieData}
           margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-          innerRadius={0.4}
+          innerRadius={0}
           padAngle={0.7}
+          colors={{ scheme: "category10" }}
           cornerRadius={3}
           activeOuterRadiusOffset={8}
           borderWidth={1}
@@ -96,7 +117,7 @@ const PieChart = ({ open, matches }) => {
           }}
           arcLinkLabelsSkipAngle={10}
           arcLinkLabelsTextColor="#333333"
-          arcLinkLabelsThickness={2}
+          arcLinkLabelsThickness={3}
           arcLinkLabelsColor={{ from: "color" }}
           arcLabelsSkipAngle={10}
           arcLabelsTextColor={{
@@ -124,51 +145,21 @@ const PieChart = ({ open, matches }) => {
             },
           ]}
           fill={[
+            // {
+            //   match: {
+            //     id: "desktop",
+            //   },
+            //   id: "squares",
+            // },
+            // {
+            //   match: {
+            //     id: "mobile",
+            //   },
+            //   id: "dots",
+            // },
             {
               match: {
-                id: "ruby",
-              },
-              id: "dots",
-            },
-            {
-              match: {
-                id: "c",
-              },
-              id: "dots",
-            },
-            {
-              match: {
-                id: "go",
-              },
-              id: "dots",
-            },
-            {
-              match: {
-                id: "python",
-              },
-              id: "dots",
-            },
-            {
-              match: {
-                id: "scala",
-              },
-              id: "lines",
-            },
-            {
-              match: {
-                id: "lisp",
-              },
-              id: "lines",
-            },
-            {
-              match: {
-                id: "elixir",
-              },
-              id: "lines",
-            },
-            {
-              match: {
-                id: "javascript",
+                id: "server",
               },
               id: "lines",
             },

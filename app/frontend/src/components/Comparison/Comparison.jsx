@@ -15,7 +15,7 @@ export default function Comparison({ open, matches }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const { state } = useLocation();
-  if (!state || state.length !== 2) {
+  if (state === null || state.length !== 2) {
     navigate("/");
     return;
   }

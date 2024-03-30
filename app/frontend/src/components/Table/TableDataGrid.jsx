@@ -76,10 +76,10 @@ let comparisonProductsArr = [];
 const pageSize = 100;
 let pageIdx = 0;
 let startIdx = 0;
+let newJsonData = [];
 
 function preProcessing(data, startIdx) {
   const newData = data.map((item, idx) => ({
-    ...item,
     id: startIdx + idx, // TODO: id: 27076 + idx,
     name: item.name,
     productCollection: item.Essentials["Product Collection"]
@@ -121,6 +121,7 @@ export default function Table({
 
   // pre-processing, TODO: explore useEffect here
   // useEffect(() => {
+  //   newJsonData = jsonData;
   //   const tempJsonData = preProcessing(jsonData, startIdx);
   //   setRows(tempJsonData);
   // }, [jsonData]);
@@ -146,6 +147,8 @@ export default function Table({
         data = data.filter((item) => {
           if (item.name && item.Essentials["Status"]) return true;
         });
+        newJsonData = data;
+        comparisonProductsArr = [];
         const tempJsonData = preProcessing(data, startIdx);
         setIsLoading(false);
         setRows(tempJsonData);
@@ -196,6 +199,7 @@ export default function Table({
         return response.json();
       })
       .then((data) => {
+        newJsonData = data;
         const tempJsonData = preProcessing(data, startIdx);
         setIsLoading(false);
         setRows(tempJsonData);
@@ -303,15 +307,28 @@ export default function Table({
           if (newRowSelectionModel.length > 2) {
             return;
           }
-          const selectedRowsData = newRowSelectionModel.map((id) =>
-            rows.find((row) => row.id === id)
-          );
 
-          comparisonProductsArr = selectedRowsData;
+          if (newRowSelectionModel.length === rowSelectionModel.length + 1) {
+            comparisonProductsArr.push(
+              newJsonData[newRowSelectionModel.slice(-1) - startIdx]
+            );
+          } else if (
+            newRowSelectionModel.length ===
+            rowSelectionModel.length - 1
+          ) {
+            if (newRowSelectionModel[0] != rowSelectionModel[0]) {
+              // that means that first choice was un-selected
+              comparisonProductsArr = comparisonProductsArr.slice(1);
+            } else {
+              comparisonProductsArr.pop();
+            }
+          } else if (newRowSelectionModel.length === 0) {
+            comparisonProductsArr = []; // reset
+          }
 
           if (newRowSelectionModel.length === 2) {
             setIsSnackBarVisible(true);
-          } else if (newRowSelectionModel.length < 2) {
+          } else {
             setIsSnackBarVisible(false);
           }
 

@@ -41,7 +41,11 @@ const styles = (theme) => ({
 export default function SideList({ handleOnListBtnClick }) {
   const theme = useTheme();
   const [listArr, setListArr] = useState([
-    { txt: "All Products", icon: <ShoppingCartIcon />, selected: true },
+    {
+      txt: "All Products",
+      icon: <ShoppingCartIcon />,
+      selected: true,
+    },
     {
       txt: "Recently Announced",
       icon: <WhatshotIcon />,

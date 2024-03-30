@@ -150,19 +150,7 @@ export default function Comparison({ open, matches }) {
         </Grid>
         <Grid item md={barCharts.length > 0 ? 6 : 12} xs={12}>
           {commonKeysArr.map((key, idx) => {
-            if (
-              [
-                "name",
-                "_id",
-                "id",
-                "productCollection",
-                "status",
-                "cores",
-                "segment",
-                "processorBaseFreq",
-              ].includes(key)
-            )
-              return; //skip
+            if (key === "name" || key == "_id") return;
 
             const obj1 = state[0][`${key}`];
             const obj2 = state[1][`${key}`];

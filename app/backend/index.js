@@ -40,6 +40,18 @@ app.get("/pie", async (req, res) => {
             { $match: { "Essentials.Vertical Segment": "Workstation" } },
             { $count: "count" },
           ],
+          Launched: [
+            { $match: { "Essentials.Status": "Launched" } },
+            { $count: "count" },
+          ],
+          Discontinued: [
+            { $match: { "Essentials.Status": "Discontinued" } },
+            { $count: "count" },
+          ],
+          Announced: [
+            { $match: { "Essentials.Status": "Announced" } },
+            { $count: "count" },
+          ],
           Total: [{ $match: {} }, { $count: "count" }],
         },
       },
@@ -50,14 +62,29 @@ app.get("/pie", async (req, res) => {
   const result2 = results[0].Server[0].count;
   const result3 = results[0].Mobile[0].count;
   const result4 = results[0].Workstation[0].count;
-  const result5 = results[0].Total[0].count;
+  const result5 = results[0].Launched[0].count;
+  const result6 = results[0].Discontinued[0].count;
+  const result7 = results[0].Announced[0].count;
+
+  const total = results[0].Total[0].count;
+
+  const percent1 = result1 / total;
+  const percent2 = result2 / total;
+  const percent3 = result3 / total;
+  const percent4 = result4 / total;
+
+  const percent5 = result5 / total;
+  const percent6 = result6 / total;
+  const percent7 = result7 / total;
 
   res.send({
-    desktopCount: result1,
-    serverCount: result2,
-    mobileCount: result3,
-    workstationCount: result4,
-    totalCount: result5,
+    desktopPercent: percent1,
+    serverPercent: percent2,
+    mobilePercent: percent3,
+    workstationPercent: percent4,
+    launchedPercent: percent5,
+    discontinuedPercent: percent6,
+    announcedPercent: percent7,
   });
 });
 

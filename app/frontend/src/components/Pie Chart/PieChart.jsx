@@ -15,7 +15,7 @@ const PieChart = ({ open, matches }) => {
   const [pieData, setPieData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/pie")
+    fetch("https://intel-assessment-backend.vercel.app/pie")
       .then((response) => {
         return response.json();
       })

@@ -20,18 +20,22 @@ const styles = {
     width: 65,
     height: 65,
     height: "100%",
-    cursor: "pointer",
+    // cursor: "pointer",
   },
 };
 
 export default function Navbar() {
+  // const handleLogoClick = () => {
+  //   navigate("/");
+  // };
+
   const navigate = useNavigate();
   return (
     <AppBar position="fixed" sx={styles.navBar}>
       <Toolbar sx={styles.toolBar}>
         <Grid container justifyContent="space-between">
           <Grid item>
-            <Box sx={styles.logoBox} onClick={() => navigate("/")}>
+            <Box sx={styles.logoBox}>
               <img src={logo} alt="Intel Logo" />
             </Box>
           </Grid>

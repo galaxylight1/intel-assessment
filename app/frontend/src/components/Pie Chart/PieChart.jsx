@@ -2,7 +2,7 @@ import { Box, Typography, CircularProgress } from "@mui/material";
 import PieChartIcon from "@mui/icons-material/PieChart";
 import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
-import ResponsivePieComponent from "./ResponsivePie";
+import ResponsivePieComponent from "./ResponsivePieComponent";
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -32,26 +32,26 @@ const PieChart = ({ open, matches }) => {
         const tempPieData = [
           [
             {
-              id: "desktop",
+              id: "Desktop",
               label: "Desktop",
               value: percent1,
               color: "hsl(242, 70%, 50%)",
             },
 
             {
-              id: "server",
+              id: "Server",
               label: "Server",
               value: percent2,
               color: "hsl(348, 70%, 50%)",
             },
             {
-              id: "mobile",
+              id: "Mobile",
               label: "Mobile",
               value: percent3,
               color: "hsl(237, 70%, 50%)",
             },
             {
-              id: "workstation",
+              id: "Workstation",
               label: "Workstation",
               value: percent4,
               color: "hsl(348, 70%, 50%)",
@@ -59,20 +59,20 @@ const PieChart = ({ open, matches }) => {
           ],
           [
             {
-              id: "launched",
+              id: "Launched",
               label: "Launched",
               value: percent5,
               color: "hsl(242, 70%, 50%)",
             },
 
             {
-              id: "discontinued",
+              id: "Discontinued",
               label: "Discontinued",
               value: percent6,
               color: "hsl(348, 70%, 50%)",
             },
             {
-              id: "announced",
+              id: "Announced",
               label: "Announced",
               value: percent7,
               color: "hsl(237, 70%, 50%)",
@@ -114,16 +114,13 @@ const PieChart = ({ open, matches }) => {
       </Typography>
       <Box
         sx={{
-          height: "75vh",
+          // height: "75vh",
           paddingLeft: matches
             ? open
               ? { xs: "12.5rem", md: "200px" }
               : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           paddingRight: "1.5rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           transition: theme.transitions.create("padding-left", {
             easing: theme.transitions.easing.easeOut,
             duration: 300,
@@ -131,11 +128,33 @@ const PieChart = ({ open, matches }) => {
         }}
       >
         {isLoading ? (
-          <CircularProgress />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "25vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
         ) : (
           <>
-            <ResponsivePieComponent data={pieData[0]} />
-            <ResponsivePieComponent data={pieData[1]} />
+            <Box
+              sx={{
+                height: "80vh",
+                width: "100%",
+              }}
+            >
+              <ResponsivePieComponent data={pieData[0]} theme="category10" />
+            </Box>
+            <Box
+              sx={{
+                height: "80vh",
+                width: "100%",
+              }}
+            >
+              <ResponsivePieComponent data={pieData[1]} theme="dark2" />
+            </Box>
           </>
         )}
       </Box>

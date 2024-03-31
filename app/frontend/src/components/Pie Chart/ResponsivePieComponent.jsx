@@ -1,13 +1,13 @@
 import { ResponsivePie } from "@nivo/pie";
 
-export default function ResponsivePieComponent({ data }) {
+export default function ResponsivePieComponent({ data, theme }) {
   return (
     <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0}
       padAngle={0.7}
-      colors={{ scheme: "category10" }}
+      colors={{ scheme: theme }}
       cornerRadius={3}
       activeOuterRadiusOffset={8}
       borderWidth={1}
@@ -20,6 +20,7 @@ export default function ResponsivePieComponent({ data }) {
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={3}
       arcLinkLabelsColor={{ from: "color" }}
+      // arcLinkLabel={(d) => d.data.slice}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{
         from: "color",
@@ -52,15 +53,15 @@ export default function ResponsivePieComponent({ data }) {
         //   },
         //   id: "squares",
         // },
-        // {
-        //   match: {
-        //     id: "mobile",
-        //   },
-        //   id: "dots",
-        // },
         {
           match: {
-            id: "server",
+            id: "Announced",
+          },
+          id: "lines",
+        },
+        {
+          match: {
+            id: "Server",
           },
           id: "lines",
         },

@@ -89,7 +89,7 @@ export default function Table({
     {
       field: "productCollection",
       headerName: "Product Collection",
-      minWidth: 300,
+      minWidth: 250,
       editable: true,
       valueGetter: (val) => {
         return val;
@@ -101,8 +101,9 @@ export default function Table({
     {
       field: "cores",
       headerName: "# of Cores",
-      minWidth: 100,
+      minWidth: 50,
       editable: true,
+      type: "number",
       renderCell: (cellValues) => {
         return cellValues.row.cores === 0 ? "-" : cellValues.row.cores;
       },

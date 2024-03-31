@@ -241,7 +241,7 @@ const PieChart = ({ open, matches }) => {
               </Typography> */}
               <ResponsivePieComponent
                 data={pieData[2]}
-                theme="nivo"
+                theme="dark2"
                 // legendSpacing={200}
                 arcLinkLabelsOffset={-24}
                 arcLinkLabelsStraightLength={9}

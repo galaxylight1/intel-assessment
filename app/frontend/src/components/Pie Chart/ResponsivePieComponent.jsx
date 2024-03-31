@@ -65,7 +65,7 @@ export default function ResponsivePieComponent({
           match: {
             id: "Not Supported",
           },
-          id: "lines",
+          id: "dots",
         },
         {
           match: {

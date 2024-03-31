@@ -4,12 +4,6 @@ import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 import ResponsivePieComponent from "./ResponsivePieComponent";
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-
 const PieChart = ({ open, matches }) => {
   const theme = useTheme();
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +22,8 @@ const PieChart = ({ open, matches }) => {
         const percent5 = data.launchedPercent;
         const percent6 = data.discontinuedPercent;
         const percent7 = data.announcedPercent;
+        const percent8 = data.hyperThreadingYesPercent;
+        const percent9 = data.hyperThreadingNoPercent;
 
         const tempPieData = [
           [
@@ -78,6 +74,21 @@ const PieChart = ({ open, matches }) => {
               color: "hsl(237, 70%, 50%)",
             },
           ],
+          [
+            {
+              id: "Supported",
+              label: "Hyper Threading ✅",
+              value: percent8,
+              color: "hsl(242, 70%, 50%)",
+            },
+
+            {
+              id: "Not Supported",
+              label: "Hyper Threading ❌",
+              value: percent9,
+              color: "hsl(348, 70%, 50%)",
+            },
+          ],
         ];
 
         setPieData(tempPieData);
@@ -121,6 +132,9 @@ const PieChart = ({ open, matches }) => {
               : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           paddingRight: "1.5rem",
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center",
           transition: theme.transitions.create("padding-left", {
             easing: theme.transitions.easing.easeOut,
             duration: 300,
@@ -145,7 +159,30 @@ const PieChart = ({ open, matches }) => {
                 width: "100%",
               }}
             >
-              <ResponsivePieComponent data={pieData[0]} theme="category10" />
+              {/* <Typography
+                variant="h6"
+                sx={{
+                  marginTop: "2rem",
+                  fontSize: "1.5rem",
+                  color: "#0067B4",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: theme.transitions.create("margin-left", {
+                    // TODO: club this together in a styles object
+                    easing: theme.transitions.easing.easeOut,
+                    duration: 300,
+                  }),
+                }}
+              >
+                Vertical Segment Analysis
+              </Typography> */}
+              <ResponsivePieComponent
+                data={pieData[0]}
+                theme="category10"
+                arcLinkLabelsOffset={0}
+                arcLinkLabelsStraightLength={0}
+              />
             </Box>
             <Box
               sx={{
@@ -153,7 +190,62 @@ const PieChart = ({ open, matches }) => {
                 width: "100%",
               }}
             >
-              <ResponsivePieComponent data={pieData[1]} theme="dark2" />
+              {/* <Typography
+                variant="h6"
+                sx={{
+                  marginTop: "2rem",
+                  fontSize: "1.5rem",
+                  color: "#0067B4",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: theme.transitions.create("margin-left", {
+                    // TODO: club this together in a styles object
+                    easing: theme.transitions.easing.easeOut,
+                    duration: 300,
+                  }),
+                }}
+              >
+                Product Status Analysis
+              </Typography> */}
+              <ResponsivePieComponent
+                data={pieData[1]}
+                theme="dark2"
+                arcLinkLabelsOffset={-24}
+                arcLinkLabelsStraightLength={9}
+              />
+            </Box>
+            <Box
+              sx={{
+                height: "80vh",
+                width: "100%",
+              }}
+            >
+              {/* <Typography
+                variant="h6"
+                sx={{
+                  marginTop: "2rem",
+                  fontSize: "1.5rem",
+                  color: "#0067B4",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: theme.transitions.create("margin-left", {
+                    // TODO: club this together in a styles object
+                    easing: theme.transitions.easing.easeOut,
+                    duration: 300,
+                  }),
+                }}
+              >
+                Hyper-Threaded Technology Analysis
+              </Typography> */}
+              <ResponsivePieComponent
+                data={pieData[2]}
+                theme="nivo"
+                // legendSpacing={200}
+                arcLinkLabelsOffset={-24}
+                arcLinkLabelsStraightLength={9}
+              />
             </Box>
           </>
         )}

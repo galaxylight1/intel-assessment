@@ -52,6 +52,25 @@ app.get("/pie", async (req, res) => {
             { $match: { "Essentials.Status": "Announced" } },
             { $count: "count" },
           ],
+          HyperThreadingYes: [
+            {
+              $match: {
+                "Advanced Technologies.Intel Hyper-Threading Technology": "Yes",
+              },
+            },
+            { $count: "count" },
+          ],
+          TotalHyperThreading: [
+            {
+              $match: {
+                "Advanced Technologies.Intel Hyper-Threading Technology": {
+                  $exists: true,
+                  $ne: null,
+                },
+              },
+            },
+            { $count: "count" },
+          ],
           Total: [{ $match: {} }, { $count: "count" }],
         },
       },
@@ -66,6 +85,9 @@ app.get("/pie", async (req, res) => {
   const result6 = results[0].Discontinued[0].count;
   const result7 = results[0].Announced[0].count;
 
+  const result8 = results[0].HyperThreadingYes[0].count;
+  const result9 = results[0].TotalHyperThreading[0].count;
+
   const total = results[0].Total[0].count;
 
   const percent1 = result1 / total;
@@ -77,6 +99,9 @@ app.get("/pie", async (req, res) => {
   const percent6 = result6 / total;
   const percent7 = result7 / total;
 
+  const hyperThreadingYesPercent = result8 / result9;
+  const hyperThreadingNoPercent = (result9 - result8) / result9;
+
   res.send({
     desktopPercent: percent1,
     serverPercent: percent2,
@@ -85,6 +110,8 @@ app.get("/pie", async (req, res) => {
     launchedPercent: percent5,
     discontinuedPercent: percent6,
     announcedPercent: percent7,
+    hyperThreadingYesPercent: hyperThreadingYesPercent,
+    hyperThreadingNoPercent: hyperThreadingNoPercent,
   });
 });
 

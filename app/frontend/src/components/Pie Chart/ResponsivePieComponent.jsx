@@ -28,7 +28,6 @@ export default function ResponsivePieComponent({
       arcLinkLabelsOffset={arcLinkLabelsOffset}
       arcLinkLabelsStraightLength={arcLinkLabelsStraightLength}
       arcLinkLabelsColor={{ from: "color" }}
-      // arcLinkLabel={(d) => d.data.slice}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{
         from: "color",
@@ -55,12 +54,6 @@ export default function ResponsivePieComponent({
         },
       ]}
       fill={[
-        // {
-        //   match: {
-        //     id: "desktop",
-        //   },
-        //   id: "squares",
-        // },
         {
           match: {
             id: "Not Supported",

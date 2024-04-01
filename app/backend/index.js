@@ -18,8 +18,6 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/pie", async (req, res) => {
-  // const cursor = collection.find(filter);
-  // const result = await cursor.toArray();
   const results = await collection
     .aggregate([
       {

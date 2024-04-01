@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import MemoryIcon from "@mui/icons-material/Memory";
 import { useTheme } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
-// import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 
@@ -28,7 +27,7 @@ let newJsonData = [];
 
 function preProcessing(data, startIdx) {
   const newData = data.map((item, idx) => ({
-    id: startIdx + idx, // TODO: id: 27076 + idx,
+    id: startIdx + idx,
     name: item.name,
     productCollection: item.Essentials["Product Collection"]
       ? item.Essentials["Product Collection"]
@@ -48,7 +47,6 @@ function preProcessing(data, startIdx) {
 }
 
 export default function Table({
-  // jsonData,
   open,
   matches,
   customFilterModel,
@@ -172,25 +170,10 @@ export default function Table({
             onClick={handleEditClick(id)}
             color="inherit"
           />,
-          // <GridActionsCellItem
-          //   icon={<DeleteIcon />}
-          //   label="Delete"
-          //   // onClick={handleDeleteClick(id)}
-          //   color="inherit"
-          // />,
         ];
       },
     },
   ];
-
-  // pre-processing, TODO: explore useEffect here
-  // useEffect(() => {
-  //   newJsonData = jsonData;
-  //   const tempJsonData = preProcessing(jsonData, startIdx);
-  //   setRows(tempJsonData);
-  // }, [jsonData]);
-
-  // const [jsonData, setJsonData] = useState([]);
 
   useEffect(() => {
     fetch("https://intel-assessment-backend.vercel.app/", {
@@ -304,9 +287,7 @@ export default function Table({
   };
 
   const handleRowModesModelChange = (newRowModesModel) => {
-    // console.log("### handleRowModesModelChange -> ", newRowModesModel);
     setRowModesModel(newRowModesModel);
-    // setRowModesModel(newRowModesModel);
   };
 
   const processRowUpdate = (newRow) => {
@@ -328,9 +309,6 @@ export default function Table({
     const updatedRow = { ...newRow, isNew: false };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     return updatedRow;
-    // const updatedRow = { ...newRow, isNew: false };
-    // setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    // return updatedRow;
   };
 
   const handleRowEditStop = (params, event) => {
@@ -340,7 +318,6 @@ export default function Table({
   };
 
   const handleEditClick = (id) => () => {
-    // console.log("### handleEditClick -> ", id, rowModesModel);
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
 

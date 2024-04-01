@@ -42,7 +42,7 @@ export default function SideList({ handleOnListBtnClick }) {
   const theme = useTheme();
   const [listArr, setListArr] = useState([
     {
-      txt: "All Products",
+      txt: "All Processors",
       icon: <ShoppingCartIcon />,
       selected: true,
     },

@@ -25,7 +25,7 @@ import CancelIcon from "@mui/icons-material/Close";
 
 const apiUrl =
   process.env.NODE_ENV === "production"
-    ? "https://intel-assessment-backend.vercel.app/"
+    ? "https://intel-assessment-backend.vercel.app"
     : "http://localhost:8080";
 
 let comparisonProductsArr = [];

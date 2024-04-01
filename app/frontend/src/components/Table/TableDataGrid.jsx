@@ -225,8 +225,6 @@ export default function Table({
           }
         }
 
-        console.log("## data -> ", data);
-
         data = data.filter((item) => {
           if (item.name && item.Essentials["Status"]) return true;
         });
@@ -290,7 +288,6 @@ export default function Table({
           }
         }
 
-        console.log("## data -> ", data);
         newJsonData = data;
         const tempJsonData = preProcessing(data, startIdx);
         setIsLoading(false);
@@ -317,8 +314,6 @@ export default function Table({
   };
 
   const processRowUpdate = (newRow) => {
-    console.log("### newRow -> ", newRow);
-
     // update to newJsonData
     const relativeIdx = newRow.id - startIdx;
     let obj = newJsonData[relativeIdx];
@@ -331,7 +326,6 @@ export default function Table({
     obj.Performance["Cache"] = newRow.cache;
 
     localStorage.setItem(`${pageIdx},${relativeIdx}`, JSON.stringify(obj));
-    console.log("### newJsonData", newJsonData);
 
     const updatedRow = { ...newRow, isNew: false };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));

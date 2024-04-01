@@ -1,3 +1,8 @@
+/*
+ * Component that renders the List inside Sidebar
+ * Side List includes quick filters such as Launched, Discontinued, Mobile Only, Desktop Only, Server Only for quick access
+ */
+
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";

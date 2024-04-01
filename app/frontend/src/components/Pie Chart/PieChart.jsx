@@ -1,3 +1,10 @@
+/*
+ * Component that renders 3 Pie Charts after getting data from '/pie' endpoint
+ * 1st Pie Chart shows percentage of the number of processors in all 4 segments: Mobile, Desktop, Server, Workstation
+ * 2nd Pie Chart shows percentage based on product status
+ * 3rd Pie Chart shows percentage based on processors support Hyper-Threaded Technology or not
+ */
+
 import { Box, Typography, CircularProgress } from "@mui/material";
 import PieChartIcon from "@mui/icons-material/PieChart";
 import { useTheme } from "@mui/material/styles";
@@ -125,16 +132,12 @@ const PieChart = ({ open, matches }) => {
       </Typography>
       <Box
         sx={{
-          // height: "75vh",
           paddingLeft: matches
             ? open
               ? { xs: "12.5rem", md: "200px" }
               : { xs: "50px", md: "50px" }
             : { xs: "50px", md: "50px" },
           paddingRight: "1.5rem",
-          // display: "flex",
-          // flexDirection: "column",
-          // justifyContent: "center",
           transition: theme.transitions.create("padding-left", {
             easing: theme.transitions.easing.easeOut,
             duration: 300,
@@ -155,28 +158,10 @@ const PieChart = ({ open, matches }) => {
           <>
             <Box
               sx={{
-                height: "80vh",
+                height: "85vh",
                 width: "100%",
               }}
             >
-              {/* <Typography
-                variant="h6"
-                sx={{
-                  marginTop: "2rem",
-                  fontSize: "1.5rem",
-                  color: "#0067B4",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: theme.transitions.create("margin-left", {
-                    // TODO: club this together in a styles object
-                    easing: theme.transitions.easing.easeOut,
-                    duration: 300,
-                  }),
-                }}
-              >
-                Vertical Segment Analysis
-              </Typography> */}
               <ResponsivePieComponent
                 data={pieData[0]}
                 theme="category10"
@@ -186,28 +171,10 @@ const PieChart = ({ open, matches }) => {
             </Box>
             <Box
               sx={{
-                height: "80vh",
+                height: "85vh",
                 width: "100%",
               }}
             >
-              {/* <Typography
-                variant="h6"
-                sx={{
-                  marginTop: "2rem",
-                  fontSize: "1.5rem",
-                  color: "#0067B4",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: theme.transitions.create("margin-left", {
-                    // TODO: club this together in a styles object
-                    easing: theme.transitions.easing.easeOut,
-                    duration: 300,
-                  }),
-                }}
-              >
-                Product Status Analysis
-              </Typography> */}
               <ResponsivePieComponent
                 data={pieData[1]}
                 theme="dark2"
@@ -217,32 +184,13 @@ const PieChart = ({ open, matches }) => {
             </Box>
             <Box
               sx={{
-                height: "80vh",
+                height: "85vh",
                 width: "100%",
               }}
             >
-              {/* <Typography
-                variant="h6"
-                sx={{
-                  marginTop: "2rem",
-                  fontSize: "1.5rem",
-                  color: "#0067B4",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: theme.transitions.create("margin-left", {
-                    // TODO: club this together in a styles object
-                    easing: theme.transitions.easing.easeOut,
-                    duration: 300,
-                  }),
-                }}
-              >
-                Hyper-Threaded Technology Analysis
-              </Typography> */}
               <ResponsivePieComponent
                 data={pieData[2]}
                 theme="nivo"
-                // legendSpacing={200}
                 arcLinkLabelsOffset={-24}
                 arcLinkLabelsStraightLength={9}
               />

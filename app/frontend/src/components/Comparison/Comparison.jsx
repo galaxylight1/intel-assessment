@@ -1,3 +1,8 @@
+/*
+ * Comparison component that renders the bar charts and collapisble table component, comparing 2 products at a time
+ * Bar charts are generated using Material UI Charts library, compares no. of cores, processor base frequency, cache, bus speed depending on whether those are available or not for both products
+ */
+
 import { Typography, Grid } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import CollapsibleTable from "./CollapsibleTable";

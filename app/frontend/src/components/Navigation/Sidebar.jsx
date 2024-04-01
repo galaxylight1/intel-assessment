@@ -1,3 +1,8 @@
+/*
+ * Component that renders the Sidebar
+ * Collapsible for screen width > 900px
+ */
+
 import { useTheme } from "@mui/material/styles";
 import { Drawer, Toolbar } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";

@@ -1,3 +1,7 @@
+/*
+ * Component that renders the toolbar of the table, it is customized and not the standard one that comes with Material UI Data Grid
+ */
+
 import {
   GridToolbarContainer,
   GridToolbarColumnsButton,

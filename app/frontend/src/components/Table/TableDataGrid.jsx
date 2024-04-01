@@ -1,8 +1,12 @@
+/*
+ * Component that renders the Table (or also called as MUI Data Grid)
+ * Implements server-side pagination, lazy loading, filtering, storing to localStorage
+ */
+
 import { useState, useEffect } from "react";
 import {
   DataGrid,
   GridRowModes,
-  GridToolbarContainer,
   GridActionsCellItem,
   GridRowEditStopReasons,
 } from "@mui/x-data-grid";
@@ -40,6 +44,11 @@ function preProcessing(data, startIdx) {
     processorBaseFreq: item.Performance
       ? item.Performance["Processor Base Frequency"]
         ? item.Performance["Processor Base Frequency"]
+        : "-"
+      : "-",
+    cache: item.Performance
+      ? item.Performance["Cache"]
+        ? item.Performance["Cache"]
         : "-"
       : "-",
   }));
@@ -116,6 +125,15 @@ export default function Table({
       editable: true,
       renderCell: (cellValues) => {
         return cellValues.row.processorBaseFreq;
+      },
+    },
+    {
+      field: "cache",
+      headerName: "Cache",
+      minWidth: 150,
+      editable: true,
+      renderCell: (cellValues) => {
+        return cellValues.row.cache;
       },
     },
     {
@@ -305,6 +323,7 @@ export default function Table({
     obj.Essentials["Vertical Segment"] = newRow.segment;
     obj.Performance["# of Cores"] = `${newRow.cores}`; // make sure # of Cores is string, not integer
     obj.Performance["Processor Base Frequency"] = newRow.processorBaseFreq;
+    obj.Performance["Cache"] = newRow.cache;
 
     localStorage.setItem(`${pageIdx},${relativeIdx}`, JSON.stringify(obj));
     console.log("### newJsonData", newJsonData);
@@ -339,8 +358,6 @@ export default function Table({
       setRows(rows.filter((row) => row.id !== id));
     }
   };
-
-  // const rows = () => [...newJsonData];
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -404,7 +421,6 @@ export default function Table({
         headerHeight={50}
         rowHeight={50}
         sx={{
-          // TODO: change this slightly
           marginLeft: matches
             ? open
               ? { xs: "12.5rem", md: "200px" }

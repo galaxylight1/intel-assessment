@@ -1,9 +1,12 @@
+/*
+ * Component that's using 'nivo' library to render a responsive Pie Chart
+ */
+
 import { ResponsivePie } from "@nivo/pie";
 
 export default function ResponsivePieComponent({
   data,
   theme,
-  legendSpacing,
   arcLinkLabelsOffset,
   arcLinkLabelsStraightLength,
 }) {
@@ -78,7 +81,6 @@ export default function ResponsivePieComponent({
           anchor: "bottom-right",
           direction: "column",
           justify: false,
-          // translateX: -200,
           translateY: 56,
           itemsSpacing: 10,
           itemWidth: 100,

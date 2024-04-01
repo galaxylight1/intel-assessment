@@ -1,6 +1,9 @@
-import { AppBar, Toolbar, Typography, Grid, Box } from "@mui/material";
+/*
+ * Component that renders the Navbar
+ */
+
+import { AppBar, Toolbar, Grid, Box } from "@mui/material";
 import logo from "../../logo.svg";
-import { useNavigate } from "react-router-dom";
 
 const styles = {
   navBar: {
@@ -20,16 +23,10 @@ const styles = {
     width: 65,
     height: 65,
     height: "100%",
-    // cursor: "pointer",
   },
 };
 
 export default function Navbar() {
-  // const handleLogoClick = () => {
-  //   navigate("/");
-  // };
-
-  const navigate = useNavigate();
   return (
     <AppBar position="fixed" sx={styles.navBar}>
       <Toolbar sx={styles.toolBar}>

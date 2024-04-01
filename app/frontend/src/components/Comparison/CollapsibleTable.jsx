@@ -1,3 +1,7 @@
+/*
+ * Component that renders the collapsible tables that are used for comparison between two products
+ */
+
 import { useState } from "react";
 import { Box, Typography, Collapse } from "@mui/material";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";

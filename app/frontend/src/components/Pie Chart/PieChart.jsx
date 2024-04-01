@@ -126,7 +126,6 @@ const PieChart = ({ open, matches }) => {
           display: "flex",
           alignItems: "center",
           transition: theme.transitions.create("margin-left", {
-            // TODO: club this together in a styles object
             easing: theme.transitions.easing.easeOut,
             duration: 300,
           }),

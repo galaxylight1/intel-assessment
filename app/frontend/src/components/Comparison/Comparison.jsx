@@ -89,7 +89,6 @@ export default function Comparison({ open, matches }) {
           display: "flex",
           alignItems: "center",
           transition: theme.transitions.create("margin-left", {
-            // TODO: club this together in a styles object
             easing: theme.transitions.easing.easeOut,
             duration: 300,
           }),
@@ -165,7 +164,12 @@ export default function Comparison({ open, matches }) {
             } else return <></>;
           })}
         </Grid>
-        <Grid item md={barCharts.length > 0 ? 6 : 12} xs={12}>
+        <Grid
+          item
+          md={barCharts.length > 0 ? 6 : 12}
+          xs={12}
+          sx={{ maxWidth: "unset" }}
+        >
           {commonKeysArr.map((key, idx) => {
             if (key === "name" || key == "_id") return;
 
@@ -173,7 +177,6 @@ export default function Comparison({ open, matches }) {
             const obj2 = state[1][`${key}`];
             let innerCommonKeysArr = [];
 
-            // TODO: temporary code
             const doesObjectHasOnlyOneKey = typeof obj1 === "string"; // for name
             if (doesObjectHasOnlyOneKey) {
               innerCommonKeysArr = [obj1, obj2];

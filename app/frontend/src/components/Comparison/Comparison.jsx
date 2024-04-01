@@ -64,7 +64,7 @@ export default function Comparison({ open, matches }) {
         isVisible: unit1 === unit2 ? true : false, // we only show bar chart if both units are same
         aData: barChartArr1,
         bData: barChartArr2,
-        unit: unit1 ? unit1 : "Cores",
+        unit: unit1 ? unit1 : "Unit",
         name: [label],
       };
 

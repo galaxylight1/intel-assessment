@@ -1,3 +1,8 @@
+/*
+ * Express backend that connects to MongoDB through MongoClient
+ * Main endpoints are: POST /, GET /pie, GET /totalCount
+ */
+
 import { MongoClient } from "mongodb";
 import express from "express";
 import cors from "cors";

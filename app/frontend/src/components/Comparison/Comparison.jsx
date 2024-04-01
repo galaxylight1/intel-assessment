@@ -7,6 +7,8 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SquareIcon from "@mui/icons-material/Square";
 import { useTheme } from "@mui/material/styles";
+import Snackbar from "@mui/material/Snackbar";
+import Slide from "@mui/material/Slide";
 
 let commonKeysArr = [];
 const labels = ["# of Cores", "Processor Base Frequency", "Cache", "Bus Speed"];
@@ -16,8 +18,18 @@ export default function Comparison({ open, matches }) {
   const navigate = useNavigate();
   const { state } = useLocation();
   if (state === null || state.length !== 2) {
-    navigate("/");
-    return;
+    // navigate("/");
+    return (
+      <Snackbar
+        open={true}
+        TransitionComponent={Slide}
+        sx={{ cursor: "pointer" }}
+        onClick={() => navigate("/")}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        message="Please select two products for comparison."
+      ></Snackbar>
+    );
   }
 
   let barCharts = [];

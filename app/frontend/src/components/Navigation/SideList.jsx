@@ -41,11 +41,13 @@ const styles = (theme) => ({
 
 export default function SideList({ handleOnListBtnClick }) {
   const theme = useTheme();
+  const currPath = window.location.pathname;
+
   const [listArr, setListArr] = useState([
     {
       txt: "All Processors",
       icon: <ShoppingCartIcon />,
-      selected: true,
+      selected: currPath === "/" ? true : false,
     },
     { txt: "Desktop Segment", icon: <MonitorIcon />, selected: false },
     { txt: "Mobile Segment", icon: <PhoneIphoneIcon />, selected: false },
@@ -60,7 +62,11 @@ export default function SideList({ handleOnListBtnClick }) {
       icon: <LayersClearIcon />,
       selected: false,
     },
-    { txt: "Pie Visualization", icon: <PieChartIcon />, selected: false },
+    {
+      txt: "Pie Visualization",
+      icon: <PieChartIcon />,
+      selected: currPath === "/graph" ? true : false,
+    },
   ]);
 
   const setSelectedInListArr = (index) => {

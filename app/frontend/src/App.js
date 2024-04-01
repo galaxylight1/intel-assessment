@@ -53,7 +53,7 @@ export default function App() {
           </Routes>
           <Routes>
             <Route
-              path="/compare"
+              path="/table"
               element={<Comparison open={open} matches={matches} />}
             ></Route>
           </Routes>

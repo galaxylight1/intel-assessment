@@ -279,7 +279,7 @@ export default function Table({
   const handleOnSnackbarClick = () => {
     const passOnProductsArr = [...comparisonProductsArr];
     comparisonProductsArr = []; // reset
-    navigate(`/compare`, { state: passOnProductsArr });
+    navigate(`/table`, { state: passOnProductsArr });
   };
 
   const handleRowSelectionModel = (newRowSelectionModel) => {
@@ -460,7 +460,7 @@ export default function Table({
         paginationMode="server"
         paginationModel={paginationModel}
         onPaginationModelChange={handlePageChange}
-        pageSizeOptions={[25, 50, 100]}
+        pageSizeOptions={[100]}
         rowCount={rowCountState}
         keepNonExistentRowsSelected
         loading={isLoading}

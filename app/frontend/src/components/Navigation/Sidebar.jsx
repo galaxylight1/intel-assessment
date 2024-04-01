@@ -47,13 +47,24 @@ export default function Sidebar({
   const handleOnListBtnClick = (txt) => {
     let obj = {};
     switch (txt) {
-      case "Recently Announced":
+      case "Launched":
         obj = {
           items: [
             {
               field: "status",
               operator: "equals",
-              value: "Announced",
+              value: "Launched",
+            },
+          ],
+        };
+        break;
+      case "Discontinued":
+        obj = {
+          items: [
+            {
+              field: "status",
+              operator: "equals",
+              value: "Discontinued",
             },
           ],
         };

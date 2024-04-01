@@ -1,9 +1,10 @@
-import WhatshotIcon from "@mui/icons-material/Whatshot";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import MonitorIcon from "@mui/icons-material/Monitor";
 import StorageIcon from "@mui/icons-material/Storage";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import LayersClearIcon from "@mui/icons-material/LayersClear";
 import {
   List,
   ListItem,
@@ -46,14 +47,19 @@ export default function SideList({ handleOnListBtnClick }) {
       icon: <ShoppingCartIcon />,
       selected: true,
     },
-    {
-      txt: "Recently Announced",
-      icon: <WhatshotIcon />,
-      selected: false,
-    },
     { txt: "Desktop Segment", icon: <MonitorIcon />, selected: false },
     { txt: "Mobile Segment", icon: <PhoneIphoneIcon />, selected: false },
     { txt: "Server Segment", icon: <StorageIcon />, selected: false },
+    {
+      txt: "Launched",
+      icon: <RocketLaunchIcon />,
+      selected: false,
+    },
+    {
+      txt: "Discontinued",
+      icon: <LayersClearIcon />,
+      selected: false,
+    },
     { txt: "Pie Visualization", icon: <PieChartIcon />, selected: false },
   ]);
 

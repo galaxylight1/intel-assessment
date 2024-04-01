@@ -71,6 +71,9 @@ export default function Table({
       field: "id",
       headerName: "ID",
       minWidth: 100,
+      valueGetter: (val) => {
+        return val + 1;
+      },
       renderCell: (cellValues) => {
         return cellValues.row.id + 1;
       },

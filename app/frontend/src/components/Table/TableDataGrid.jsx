@@ -23,6 +23,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://intel-assessment-backend.vercel.app/"
+    : "http://localhost:8080";
+
 let comparisonProductsArr = [];
 const pageSize = 100;
 let pageIdx = 0;
@@ -197,7 +202,7 @@ export default function Table({
   ];
 
   useEffect(() => {
-    fetch("https://intel-assessment-backend.vercel.app/", {
+    fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -235,7 +240,7 @@ export default function Table({
   }, []);
 
   useEffect(() => {
-    fetch("https://intel-assessment-backend.vercel.app/totalCount")
+    fetch(`${apiUrl}/totalCount`)
       .then((response) => {
         return response.json();
       })
@@ -263,7 +268,7 @@ export default function Table({
 
     if (startIdx < 0) startIdx = 0;
 
-    fetch("https://intel-assessment-backend.vercel.app/", {
+    fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

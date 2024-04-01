@@ -11,13 +11,18 @@ import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 import ResponsivePieComponent from "./ResponsivePieComponent";
 
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://intel-assessment-backend.vercel.app/"
+    : "http://localhost:8080";
+
 const PieChart = ({ open, matches }) => {
   const theme = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [pieData, setPieData] = useState([]);
 
   useEffect(() => {
-    fetch("https://intel-assessment-backend.vercel.app/pie")
+    fetch(`${apiUrl}/pie`)
       .then((response) => {
         return response.json();
       })
